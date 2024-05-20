@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.intuit.oss.extendgql</groupId>
-    <artifactId>extendgql</artifactId>
+    <groupId>com.intuit.oss.gqlex</groupId>
+    <artifactId>gqlex-path-selection-java</artifactId>
     <version>2.0.1</version>
     <packaging>jar</packaging>
-    <name>GraphQL extended library</name>
+    <name>GraphQL gqlex library</name>
     <url>https://github.intuit.com/ykarni/eXtendGql</url>
     <inceptionYear>2023</inceptionYear>
     <description>
-       Provide GraphQl json conversion and gql extended library.
+       Gqlex path selection and traversal
     </description>
 
     <properties>
