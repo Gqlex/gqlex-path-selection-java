@@ -256,7 +256,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]/hero/.../include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]/hero/.../include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -282,10 +282,10 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]/.../x/.../friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]/.../x/.../friends/include[type=direc]");
 
-        assertNotNull(nodeContexts);
-        assertEquals(0, nodeContexts.size());
+        assertNull(nodeContexts);
+        //assertEquals(0, nodeContexts.size());
 
         /*for (GqlNodeContext gqlNodeContext : nodeContexts) {
             assertEquals(gqlNodeContext.getType(), DocumentElementType.DIRECTIVE);
@@ -491,7 +491,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]/.../friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]/.../friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -518,7 +518,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]/.../.../include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]/.../.../include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -600,7 +600,7 @@ class SelectorFacadeTest {
             String queryString = Files.readString(file.toPath());
 
             // query {  Instrument(id: "1234") }
-            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{4353:yryt}//query[name=hero]/hero/friends/include[type=direc]");
+            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{4353:yryt}//query[name=Hero]/hero/friends/include[type=direc]");
 
             assertNotNull(nodeContexts);
             assertEquals(4, nodeContexts.size());
@@ -629,7 +629,7 @@ class SelectorFacadeTest {
             String queryString = Files.readString(file.toPath());
 
             // query {  Instrument(id: "1234") }
-            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{aa:5}//query[name=hero]/hero/friends/include[type=direc]");
+            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{aa:5}//query[name=Hero]/hero/friends/include[type=direc]");
 
             assertNotNull(nodeContexts);
             assertEquals(4, nodeContexts.size());
@@ -658,7 +658,7 @@ class SelectorFacadeTest {
             String queryString = Files.readString(file.toPath());
 
             // query {  Instrument(id: "1234") }
-            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{}//query[name=hero]/hero/friends/include[type=direc]");
+            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{}//query[name=Hero]/hero/friends/include[type=direc]");
 
             assertNotNull(nodeContexts);
             assertEquals(4, nodeContexts.size());
@@ -687,7 +687,7 @@ class SelectorFacadeTest {
             String queryString = Files.readString(file.toPath());
 
             // query {  Instrument(id: "1234") }
-            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{://query[name=hero]/hero/friends/include[type=direc]");
+            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{://query[name=Hero]/hero/friends/include[type=direc]");
 
             assertNotNull(nodeContexts);
             assertEquals(4, nodeContexts.size());
@@ -716,7 +716,7 @@ class SelectorFacadeTest {
             String queryString = Files.readString(file.toPath());
 
             // query {  Instrument(id: "1234") }
-            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, ":}//query[name=hero]/hero/friends/include[type=direc]");
+            List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, ":}//query[name=Hero]/hero/friends/include[type=direc]");
 
             assertNotNull(nodeContexts);
             assertEquals(4, nodeContexts.size());
@@ -745,7 +745,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{:}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{:}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -771,7 +771,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{0:1000}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{0:1000}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -798,7 +798,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{345:463463}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{345:463463}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(0, nodeContexts.size());
@@ -820,7 +820,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{0:}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{0:}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -846,7 +846,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{1:}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{1:}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(3, nodeContexts.size());
@@ -872,7 +872,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{:2}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{:2}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(3, nodeContexts.size());
@@ -898,7 +898,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{2:2}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{2:2}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(1, nodeContexts.size());
@@ -924,7 +924,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{2:3}//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{2:3}//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(2, nodeContexts.size());
@@ -933,6 +933,48 @@ class SelectorFacadeTest {
             assertEquals(gqlNodeContext.getType(), DocumentElementType.DIRECTIVE);
             assertTrue(((Directive) gqlNodeContext.getNode()).getName().equalsIgnoreCase("include"));
         }
+    }
+
+    @Test
+    void verify_select_single_path_double_slash_range_with_start_and_end_case_sen_hero_name() throws IOException {
+
+        String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
+        String testFolder = "gqlex_samples";
+
+        ClassLoader classLoader = this.getClass().getClassLoader();
+
+        File file = new File(classLoader.getResource(testFolder + "/" + fileName).getFile());
+
+        SelectorFacade selectorFacade = new SelectorFacade();
+
+        String queryString = Files.readString(file.toPath());
+
+        // query {  Instrument(id: "1234") }
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{2:3}//query[name=heRo]/hero/friends/include[type=direc]");
+
+        assertNull(nodeContexts);
+
+    }
+
+    @Test
+    void verify_select_single_path_double_slash_range_with_start_and_end_case_sen_middle_name() throws IOException {
+
+        String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
+        String testFolder = "gqlex_samples";
+
+        ClassLoader classLoader = this.getClass().getClassLoader();
+
+        File file = new File(classLoader.getResource(testFolder + "/" + fileName).getFile());
+
+        SelectorFacade selectorFacade = new SelectorFacade();
+
+        String queryString = Files.readString(file.toPath());
+
+        // query {  Instrument(id: "1234") }
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "{2:3}//query[name=Hero]/hero/frieNds/include[type=direc]");
+
+        assertNull(nodeContexts);
+
     }
 
     @Test
@@ -950,7 +992,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -976,7 +1018,7 @@ class SelectorFacadeTest {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "/query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "/query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(1, nodeContexts.size());
@@ -1079,7 +1121,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]/hero/friends/include[type=direc]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(nodeContexts);
         assertEquals(4, nodeContexts.size());
@@ -1107,7 +1149,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=hero]");
+        List<GqlNodeContext> nodeContexts = selectorFacade.selectMany(queryString, "//query[name=Hero]");
 
         assertNotNull(nodeContexts);
         assertEquals(1, nodeContexts.size());
@@ -1228,7 +1270,7 @@ mutation createCompany {
         // query {  Instrument(id: "1234") }
         List<GqlNodeContext> select = selectorFacade.selectMany(queryString, "//query/Instrument/Reference/title");
 
-        assertNotNull(select);
+        assertNull(select);
         //assertEquals(select.getType(), DocumentElementType.FIELD);
         // assertTrue(((Field) select.getNode()).getName().equalsIgnoreCase("title"));
     }
@@ -1518,7 +1560,32 @@ mutation createCompany {
 
     @Test
         // query {  Instrument(Name: "1234") {    Reference {      Name title   }  }}
-    void duplicate_fields_name_select_arg() throws IOException {
+    void duplicate_fields_name_select_arg_case_sensitive() throws IOException {
+
+        String fileName = "duplicate_field_names.txt";
+        String testFolder = "gqlex_samples";
+
+        ClassLoader classLoader = this.getClass().getClassLoader();
+
+        File file = new File(classLoader.getResource(testFolder + "/" + fileName).getFile());
+
+        SelectorFacade selectorFacade = new SelectorFacade();
+
+        String queryString = Files.readString(file.toPath());
+
+        // query {  Instrument(id: "1234") }
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query/Instrument/Name[type=arg]");
+
+        assertNotNull(select);
+
+        assertEquals(select.getType(), DocumentElementType.ARGUMENT);
+        assertTrue(((Argument) select.getNode()).getName().equalsIgnoreCase("name"));
+
+    }
+
+    @Test
+        // query {  Instrument(Name: "1234") {    Reference {      Name title   }  }}
+    void duplicate_fields_name_select_arg_case_insensitive() throws IOException {
 
         String fileName = "duplicate_field_names.txt";
         String testFolder = "gqlex_samples";
@@ -1534,11 +1601,7 @@ mutation createCompany {
         // query {  Instrument(id: "1234") }
         GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query/Instrument/name[type=arg]");
 
-        assertNotNull(select);
-
-        assertEquals(select.getType(), DocumentElementType.ARGUMENT);
-        assertTrue(((Argument) select.getNode()).getName().equalsIgnoreCase("name"));
-
+        assertNull(select);
     }
 
 
@@ -1558,13 +1621,9 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query/Instrument/name[type=arg]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query/Instrument/NAME[type=arg]");
 
-        assertNotNull(select);
-
-        assertEquals(select.getType(), DocumentElementType.ARGUMENT);
-        assertTrue(((Argument) select.getNode()).getName().equalsIgnoreCase("name"));
-
+        assertNull(select);
     }
 
 
@@ -1634,7 +1693,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]");
 
         assertNotNull(select);
 
@@ -1661,7 +1720,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/episode[type=var]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/episode[type=var]");
 
         assertNotNull(select);
 
@@ -1687,7 +1746,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/withFriends[type=var]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/withFriends[type=var]");
 
         assertNotNull(select);
 
@@ -1712,7 +1771,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/hero/episode[type=arg]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/hero/episode[type=arg]");
 
         assertNotNull(select);
 
@@ -1737,7 +1796,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/hero/name");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/hero/name");
 
         assertNotNull(select);
 
@@ -1762,7 +1821,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/hero/friends");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/hero/friends");
 
         assertNotNull(select);
 
@@ -1787,7 +1846,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/hero/friends/include[type=direc]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/hero/friends/include[type=direc]");
 
         assertNotNull(select);
 
@@ -1811,7 +1870,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/hero/friends/include[type=direc]/if[type=arg]");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/hero/friends/include[type=direc]/if[type=arg]");
 
         assertNotNull(select);
 
@@ -1836,7 +1895,7 @@ mutation createCompany {
         String queryString = Files.readString(file.toPath());
 
         // query {  Instrument(id: "1234") }
-        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=hero]/hero/friends/name");
+        GqlNodeContext select = selectorFacade.selectSingle(queryString, "//query[name=Hero]/hero/friends/name");
 
         assertNotNull(select);
 

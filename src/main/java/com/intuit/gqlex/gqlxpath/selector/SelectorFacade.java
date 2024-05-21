@@ -59,6 +59,9 @@ public class SelectorFacade {
         traversal.traverse(graphQuery, gqlBrowserObserver.getTuneableSearchData());
 
         List<GqlNodeContext> searchNodeList = gqlBrowserObserver.getSearchNodeList();
+        if(  searchNodeList == null){
+            return null;
+        }
         SearchPathBuilder searchPathBuilder = gqlBrowserObserver.getSearchPathBuilder();
         if( searchPathBuilder.isSelectByRange() ){
             SelectionRange selectionRange = searchPathBuilder.getSelectionRange();

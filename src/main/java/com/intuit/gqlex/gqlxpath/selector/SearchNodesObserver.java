@@ -208,7 +208,7 @@ public class SearchNodesObserver implements TraversalObserver {
             this.actualOperationName = actualOperationName;
         }
     }
-    private List<GqlNodeContext> searchNodesResultArray = new ArrayList<>();
+    private List<GqlNodeContext> searchNodesResultArray = null;
     @Override
     public void updateNodeEntry(Node node,
                                 Node parentNode,
@@ -259,7 +259,9 @@ public class SearchNodesObserver implements TraversalObserver {
                         int tempNextExpectedStuckIndex = currentActualStackIndex;
 
                         boolean isStackPopEndedFoundNoMatchAgainstExpected = false;
-                        while (!nextExpectedSearchPathElement.getName().equalsIgnoreCase(actualNodeDescriptor.getActualName()) ||
+                        while ( ( nextExpectedSearchPathElement.getName().equalsIgnoreCase(DocumentElementType.OPERATION_DEFINITION.getShortName())?
+                                !nextExpectedSearchPathElement.getName().equalsIgnoreCase(actualNodeDescriptor.getActualName()) :
+                                !nextExpectedSearchPathElement.getName().equals(actualNodeDescriptor.getActualName())) ||
                                 !nextExpectedSearchPathElement.getType().equalsIgnoreCase(actualNode.getType().getShortName())) {
 
                             if( tempNextExpectedStuckIndex == -1){
@@ -289,27 +291,45 @@ public class SearchNodesObserver implements TraversalObserver {
                         break;
                     }
 
-                }
+                } // isAny section completed
 
                 if( actualNode.getType().equals(DocumentElementType.OPERATION_DEFINITION) || actualNode.getType().equals(DocumentElementType.MUTATION_DEFINITION)){
                     if ( expectedSearchPathElement.getType().equals(actualNode.getType().getShortName())) {
 
                         if(     actualNodeDescriptor.getActualOperationName() != null && expectedSearchPathElement.getOperationName() != null &&
-                                expectedSearchPathElement.getOperationName().equalsIgnoreCase( actualNodeDescriptor.getActualOperationName()) &&
-                                actualNodeDescriptor.getActualName() != null && expectedSearchPathElement.getName() != null && expectedSearchPathElement.getName().equalsIgnoreCase( actualNodeDescriptor.getActualName() )){
-                            isMatch &= true;
+                                expectedSearchPathElement.getOperationName().equals( actualNodeDescriptor.getActualOperationName()) &&
+                                actualNodeDescriptor.getActualName() != null &&
+                                expectedSearchPathElement.getName() != null
+                                ){
+                            if( actualNodeDescriptor.getActualName().equalsIgnoreCase("query")){
+                                if(expectedSearchPathElement.getName().equalsIgnoreCase( actualNodeDescriptor.getActualName() )) {
+                                    isMatch &= true;
+                                }else if(expectedSearchPathElement.getName().equals( actualNodeDescriptor.getActualName() )) {
+                                    isMatch &= true;
+                                }
+                            }else{
+                                isMatch &= true;
+                            }
                         }else if(     actualNodeDescriptor.getActualOperationName() != null &&
                                 actualNodeDescriptor.getActualName() == null &&
                                 expectedSearchPathElement.getOperationName() != null &&
-                                expectedSearchPathElement.getOperationName().equalsIgnoreCase( actualNodeDescriptor.getActualOperationName())){
+                                expectedSearchPathElement.getOperationName().equals( actualNodeDescriptor.getActualOperationName())){
                             isMatch &= true;
                         }else if(     actualNodeDescriptor.getActualOperationName() == null &&
                                 actualNodeDescriptor.getActualName() != null &&
                                 expectedSearchPathElement.getName() != null &&
                                 expectedSearchPathElement.getName().equalsIgnoreCase(actualNodeDescriptor.getActualName())
-
                         ){
-                            isMatch &= true;
+                            if( actualNodeDescriptor.getActualName().equalsIgnoreCase("query")){
+                                if(expectedSearchPathElement.getName().equalsIgnoreCase( actualNodeDescriptor.getActualName() )) {
+                                    isMatch &= true;
+                                }else if(expectedSearchPathElement.getName().equals( actualNodeDescriptor.getActualName() )) {
+                                    isMatch &= true;
+                                }
+                            }else{
+                                isMatch &= true;
+                            }
+
                         }else{
                             isMatch &= false;
                         }
@@ -317,7 +337,7 @@ public class SearchNodesObserver implements TraversalObserver {
                         isMatch &= false;
                     }
                 }else{
-                    if (expectedSearchPathElement.getName().equalsIgnoreCase(actualNodeDescriptor.getActualName()) &&
+                    if (expectedSearchPathElement.getName().equals(actualNodeDescriptor.getActualName()) &&
                             expectedSearchPathElement.getType().equalsIgnoreCase(actualNode.getType().getShortName())) {
                         isMatch &= true;
                     } else {
@@ -346,6 +366,10 @@ public class SearchNodesObserver implements TraversalObserver {
                 gqlNodeContext.setLevel(context.getLevel());
 
                 gqlNodeContext.getSearchContext().setSearchPaths(this.searchPathBuilder.getPathElements());
+
+                if( searchNodesResultArray == null ){
+                    searchNodesResultArray = new ArrayList<>();
+                }
 
                 if( this.transactionId != null ){
                     searchNodesResultArray.add(gqlNodeContext);
