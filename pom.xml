@@ -6,7 +6,7 @@
     <version>2.0.1</version>
     <packaging>jar</packaging>
     <name>GraphQL gqlex library</name>
-    <url>https://github.intuit.com/ykarni/eXtendGql</url>
+    <url>https://github.com/gqlex</url>
     <inceptionYear>2023</inceptionYear>
     <description>
        Gqlex path selection and traversal
@@ -24,16 +24,16 @@
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
-        <central.repo>https://artifact.intuit.com/artifactory/maven-proxy/</central.repo>
-        <releasedeployrepo>https://artifactory.a.intuit.com/artifactory/maven.fraudprevention.imvisionintuit-releases</releasedeployrepo>
-        <snapshotdeployrepo>https://artifactory.a.intuit.com/artifactory/maven.fraudprevention.imvisionintuit-snapshots</snapshotdeployrepo>
+        <central.repo>https://mvnrepository.com/artifact/</central.repo>
+        <!--<releasedeployrepo>https://artifactory.a.intuit.com/artifactory/maven.fraudprevention.imvisionintuit-releases</releasedeployrepo>
+        <snapshotdeployrepo>https://artifactory.a.intuit.com/artifactory/maven.fraudprevention.imvisionintuit-snapshots</snapshotdeployrepo>-->
     </properties>
-    <scm>
+   <!-- <scm>
         <connection>scm:git:https://github.intuit.com/fraudprevention/blade-graphql-lib.git</connection>
         <developerConnection>scm:git:https://github.intuit.com/fraudprevention/blade-graphql-lib.git</developerConnection>
         <url>https://github.intuit.com/fraudprevention/blade-graphql-lib</url>
         <tag>HEAD</tag>
-    </scm>
+    </scm>-->
     
     <dependencies>
         <dependency>
