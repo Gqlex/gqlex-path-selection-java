@@ -4,9 +4,15 @@
     <!-- This file may also be copied into each developer's $HOME/.m2/ directory,
          so that they may omit the '-s settings.xml' gqlArgumentsContainer on 'mvn' commands. -->
     <mirrors>
+       <!-- <mirror>
+            <id>intuit-mirror</id>
+            <url>https://artifact.intuit.com/artifactory/maven-proxy/</url>
+            &lt;!&ndash; same value as ${central.repo} from (jsk-internal-parent) POM &ndash;&gt;
+            <mirrorOf>*</mirrorOf>
+        </mirror>-->
         <mirror>
             <id>central-mirror</id>
-            <url>https://artifact.intuit.com/artifactory/maven-proxy/</url>
+            <url>https://mvnrepository.com/artifact/</url>
             <!-- same value as ${central.repo} from (jsk-internal-parent) POM -->
             <mirrorOf>*</mirrorOf>
         </mirror>
