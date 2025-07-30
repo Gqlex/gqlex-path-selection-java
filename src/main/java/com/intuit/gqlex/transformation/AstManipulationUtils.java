@@ -898,4 +898,296 @@ public class AstManipulationUtils {
             return queryString; // Return unchanged on error
         }
     }
+    
+    /**
+     * Inlines all fragments in a GraphQL query string.
+     * This is a generic and agnostic approach that works with any GraphQL schema.
+     */
+    public static String inlineFragmentsInQueryString(String queryString) {
+        try {
+            String result = queryString;
+            boolean changed = true;
+            int maxIterations = 10; // Prevent infinite loops
+            int iterations = 0;
+            
+            // Keep inlining fragments until no more changes are made
+            while (changed && iterations < maxIterations) {
+                changed = false;
+                iterations++;
+                
+                // Find all fragment spreads and replace them with the fragment content
+                // Handle fragment spreads with directives like: ...UserProfile @include(if: $includeProfile)
+                java.util.regex.Pattern fragmentSpreadPattern = java.util.regex.Pattern.compile("\\s*\\.\\.\\.\\s*([a-zA-Z_][a-zA-Z0-9_]*)(\\s*@[^\\n\\r]*)?");
+                java.util.regex.Matcher matcher = fragmentSpreadPattern.matcher(result);
+                
+                StringBuffer newResult = new StringBuffer();
+                while (matcher.find()) {
+                    String fragmentName = matcher.group(1);
+                    String fullMatch = matcher.group(0);
+                    String directives = matcher.group(2) != null ? matcher.group(2) : "";
+                    
+                    String fragmentContent = findFragmentDefinition(result, fragmentName);
+                    if (fragmentContent != null) {
+                        // Replace the fragment spread with the fragment content, preserving directives
+                        // Format the replacement properly with correct spacing
+                        String replacement;
+                        if (!directives.isEmpty()) {
+                            // Apply directives only to top-level fields, not to nested structures
+                            String[] lines = fragmentContent.split("\\n");
+                            StringBuilder formattedContent = new StringBuilder();
+                            int braceLevel = 0;
+                            
+                            for (String line : lines) {
+                                String trimmedLine = line.trim();
+                                if (trimmedLine.isEmpty()) continue;
+                                
+                                // Count braces to track nesting level
+                                for (char c : line.toCharArray()) {
+                                    if (c == '{') braceLevel++;
+                                    if (c == '}') braceLevel--;
+                                }
+                                
+                                // Only apply directives to top-level fields (braceLevel == 0)
+                                if (braceLevel == 0 && !trimmedLine.startsWith("{") && !trimmedLine.startsWith("}")) {
+                                    // This is a top-level field, apply the directive
+                                    formattedContent.append("    ").append(trimmedLine).append(directives).append("\n");
+                                } else {
+                                    // This is a nested structure or brace, don't apply directive
+                                    formattedContent.append("    ").append(trimmedLine).append("\n");
+                                }
+                            }
+                            replacement = formattedContent.toString().trim();
+                        } else {
+                            // No directives, just use the fragment content as is
+                            replacement = fragmentContent;
+                        }
+                        
+                        // Replace the complete fragment spread
+                        matcher.appendReplacement(newResult, java.util.regex.Matcher.quoteReplacement(replacement));
+                        changed = true;
+                    } else {
+                        // Keep the fragment spread if definition not found
+                        matcher.appendReplacement(newResult, java.util.regex.Matcher.quoteReplacement(fullMatch));
+                    }
+                }
+                matcher.appendTail(newResult);
+                
+                result = newResult.toString();
+            }
+            
+            // Remove fragment definitions from the query
+            return removeFragmentDefinitions(result);
+        } catch (Exception e) {
+            return queryString; // Return unchanged on error
+        }
+    }
+    
+    /**
+     * Finds a fragment definition in the query string.
+     */
+    private static String findFragmentDefinition(String queryString, String fragmentName) {
+        try {
+            // Find the fragment definition start
+            String fragmentStartPattern = "fragment\\s+" + fragmentName + "\\s+on\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\{";
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(fragmentStartPattern, java.util.regex.Pattern.DOTALL);
+            java.util.regex.Matcher matcher = pattern.matcher(queryString);
+            
+            if (matcher.find()) {
+                int startPos = matcher.end(); // Position after the opening brace
+                
+                // Find the matching closing brace
+                int braceCount = 1;
+                int endPos = startPos;
+                for (int i = startPos; i < queryString.length(); i++) {
+                    char c = queryString.charAt(i);
+                    if (c == '{') {
+                        braceCount++;
+                    } else if (c == '}') {
+                        braceCount--;
+                        if (braceCount == 0) {
+                            endPos = i;
+                            break;
+                        }
+                    }
+                }
+                
+                return queryString.substring(startPos, endPos).trim(); // Return the fragment content
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /**
+     * Removes all fragment definitions from the query string.
+     */
+    private static String removeFragmentDefinitions(String queryString) {
+        try {
+            String fragmentStartPattern = "\\s*fragment\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s+on\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s*\\{";
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(fragmentStartPattern, java.util.regex.Pattern.DOTALL);
+            java.util.regex.Matcher matcher = pattern.matcher(queryString);
+            
+            StringBuffer result = new StringBuffer();
+            int lastEnd = 0;
+            
+            while (matcher.find()) {
+                // Add text before the fragment
+                result.append(queryString.substring(lastEnd, matcher.start()));
+                
+                // Find the matching closing brace
+                int startPos = matcher.end();
+                int braceCount = 1;
+                int endPos = startPos;
+                
+                for (int i = startPos; i < queryString.length(); i++) {
+                    char c = queryString.charAt(i);
+                    if (c == '{') {
+                        braceCount++;
+                    } else if (c == '}') {
+                        braceCount--;
+                        if (braceCount == 0) {
+                            endPos = i + 1; // Include the closing brace
+                            break;
+                        }
+                    }
+                }
+                
+                lastEnd = endPos;
+            }
+            
+            // Add remaining text after last fragment
+            result.append(queryString.substring(lastEnd));
+            
+            return result.toString();
+        } catch (Exception e) {
+            return queryString;
+        }
+    }
+    
+    /**
+     * Extracts a fragment from a specified path in the query string.
+     * This is a generic and agnostic approach that works with any GraphQL schema.
+     */
+    public static String extractFragmentFromQueryString(String queryString, String path, String fragmentName, String typeCondition) {
+        try {
+            // Parse the path to find the target field
+            String[] pathParts = path.split("/");
+            
+            if (pathParts.length < 3) {
+                return queryString; // Invalid path
+            }
+            
+            // Extract the field name from the path (e.g., "//query/user" -> "user")
+            String targetFieldName = pathParts[pathParts.length - 1];
+            
+            // Handle the case where the path might be "//query/user" and we need to find "user"
+            if (targetFieldName.isEmpty() && pathParts.length >= 4) {
+                targetFieldName = pathParts[pathParts.length - 2];
+            }
+            
+            // Find the target field and its selection set
+            // Handle fields with arguments like: user(id: $userId) { ... }
+            String fieldPattern = "\\b" + targetFieldName + "\\s*\\([^)]*\\)\\s*\\{";
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(fieldPattern, java.util.regex.Pattern.DOTALL);
+            java.util.regex.Matcher matcher = pattern.matcher(queryString);
+            
+            boolean found = matcher.find();
+            
+            if (!found) {
+                // Try without arguments: user { ... }
+                fieldPattern = "\\b" + targetFieldName + "\\s*\\{";
+                pattern = java.util.regex.Pattern.compile(fieldPattern, java.util.regex.Pattern.DOTALL);
+                matcher = pattern.matcher(queryString);
+                found = matcher.find();
+            }
+            
+            if (found) {
+                int startPos = matcher.end(); // Position after the opening brace
+                
+                // Find the matching closing brace
+                int braceCount = 1;
+                int endPos = startPos;
+                for (int i = startPos; i < queryString.length(); i++) {
+                    char c = queryString.charAt(i);
+                    if (c == '{') {
+                        braceCount++;
+                    } else if (c == '}') {
+                        braceCount--;
+                        if (braceCount == 0) {
+                            endPos = i;
+                            break;
+                        }
+                    }
+                }
+                
+                String selectionSetContent = queryString.substring(startPos, endPos).trim();
+                
+                // Create the fragment definition
+                String fragmentDefinition = "\n\nfragment " + fragmentName + " on " + typeCondition + " {\n  " + selectionSetContent + "\n}";
+                
+                // Replace the selection set with a fragment spread
+                String fragmentSpread = "... " + fragmentName;
+                
+                // Replace the selection set content with the fragment spread
+                String beforeField = queryString.substring(0, startPos);
+                String afterField = queryString.substring(endPos);
+                
+                return beforeField + fragmentSpread + afterField + fragmentDefinition;
+            }
+            
+            return queryString;
+        } catch (Exception e) {
+            return queryString; // Return unchanged on error
+        }
+    }
+    
+    /**
+     * Creates a fragment definition from a selection set.
+     * This is a generic and agnostic approach that works with any GraphQL schema.
+     */
+    public static String createFragmentDefinition(String fragmentName, String typeCondition, String selectionSet) {
+        return "fragment " + fragmentName + " on " + typeCondition + " {\n  " + selectionSet + "\n}";
+    }
+    
+    /**
+     * Adds a fragment spread to a selection set.
+     * This is a generic and agnostic approach that works with any GraphQL schema.
+     */
+    public static String addFragmentSpreadToQueryString(String queryString, String path, String fragmentName) {
+        try {
+            // Parse the path to find the target field
+            String[] pathParts = path.split("/");
+            if (pathParts.length < 3) {
+                return queryString; // Invalid path
+            }
+            
+            String targetFieldName = pathParts[pathParts.length - 1];
+            
+            // Find the target field and its selection set
+            String fieldPattern = "\\b" + targetFieldName + "\\s*\\{([^}]*)\\}";
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(fieldPattern, java.util.regex.Pattern.DOTALL);
+            java.util.regex.Matcher matcher = pattern.matcher(queryString);
+            
+            if (matcher.find()) {
+                String selectionSetContent = matcher.group(1).trim();
+                String fragmentSpread = "... " + fragmentName;
+                
+                // Add the fragment spread to the selection set
+                String newSelectionSet = selectionSetContent.isEmpty() ? 
+                    fragmentSpread : 
+                    selectionSetContent + "\n  " + fragmentSpread;
+                
+                // Replace the selection set content
+                String beforeField = queryString.substring(0, matcher.start(1));
+                String afterField = queryString.substring(matcher.end(1));
+                
+                return beforeField + newSelectionSet + afterField;
+            }
+            
+            return queryString;
+        } catch (Exception e) {
+            return queryString; // Return unchanged on error
+        }
+    }
 } 

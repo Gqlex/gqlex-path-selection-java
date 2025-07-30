@@ -175,6 +175,8 @@ public class GraphQLTransformer {
         return this;
     }
     
+
+    
     /**
      * Applies all transformations and returns the result.
      */
