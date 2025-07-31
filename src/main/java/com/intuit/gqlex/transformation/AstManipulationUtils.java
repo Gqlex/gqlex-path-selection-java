@@ -2,6 +2,10 @@ package com.intuit.gqlex.transformation;
 
 import com.intuit.gqlex.gqlxpath.selector.SelectorFacade;
 import com.intuit.gqlex.common.GqlNodeContext;
+import com.intuit.gqlex.transformation.optimization.PerformanceOptimizationManager;
+import com.intuit.gqlex.transformation.optimization.ASTCache;
+import com.intuit.gqlex.transformation.optimization.RegexPatternPool;
+import com.intuit.gqlex.transformation.optimization.ObjectPool;
 import graphql.language.*;
 import graphql.parser.Parser;
 
@@ -13,6 +17,11 @@ import java.util.*;
 public class AstManipulationUtils {
     
     private static final SelectorFacade selectorFacade = new SelectorFacade();
+    
+    // Performance optimization systems
+    private static final PerformanceOptimizationManager perfManager = PerformanceOptimizationManager.getInstance();
+    private static final ASTCache astCache = perfManager.getAstCache();
+    private static final RegexPatternPool regexPool = perfManager.getRegexPool();
     
     /**
      * Finds a node at the specified path using gqlXPath.
@@ -56,21 +65,18 @@ public class AstManipulationUtils {
             
             String oldName = pathParts[pathParts.length - 1];
             
-            // Convert document to string for manipulation
-            String queryString = AstPrinter.printAst(document);
-            
-            // Use regex to replace the field name while preserving structure
-            String modifiedQuery = renameFieldInStringDirect(queryString, oldName, newName);
-            
-            // Parse the modified string back to a Document
-            try {
-                Parser parser = new Parser();
-                Document newDocument = parser.parseDocument(modifiedQuery);
-                return newDocument;
-            } catch (Exception parseError) {
-                // If parsing fails, return the original document
+            // Use optimized AST cache for document to string conversion
+            String queryString = astCache.getOrPrint(document);
+            if (queryString == null) {
                 return document;
             }
+            
+            // Use optimized regex pool for field name replacement
+            String modifiedQuery = regexPool.replaceFieldName(queryString, oldName, newName);
+            
+            // Use optimized AST cache for string to document conversion
+            Document newDocument = astCache.getOrParse(modifiedQuery);
+            return newDocument != null ? newDocument : document;
             
         } catch (Exception e) {
             return document; // Return unchanged on error
@@ -82,12 +88,8 @@ public class AstManipulationUtils {
      * This is a generic and agnostic approach that preserves the GraphQL structure.
      */
     private static String renameFieldInStringDirect(String queryString, String oldName, String newName) {
-        // Use word boundaries to ensure we only replace the exact field name
-        // This prevents replacing "email" when it's part of "emailAddress"
-        String pattern = "\\b" + oldName + "\\b";
-        String result = queryString.replaceAll(pattern, newName);
-        
-        return result;
+        // Use optimized regex pool for field name replacement
+        return regexPool.replaceFieldName(queryString, oldName, newName);
     }
     
     /**
@@ -95,12 +97,8 @@ public class AstManipulationUtils {
      * This is a generic and agnostic approach that preserves the GraphQL structure.
      */
     private static String renameFieldInString(String queryString, String oldName, String newName) {
-        // Use word boundaries to ensure we only replace the exact field name
-        // This prevents replacing "email" when it's part of "emailAddress"
-        String pattern = "\\b" + oldName + "\\b";
-        String result = queryString.replaceAll(pattern, newName);
-        
-        return result;
+        // Use optimized regex pool for field name replacement
+        return regexPool.replaceFieldName(queryString, oldName, newName);
     }
     
     /**
@@ -109,8 +107,11 @@ public class AstManipulationUtils {
      */
     public static Document addField(Document document, String path, String fieldName) {
         try {
-            // Convert document to string for manipulation
-            String queryString = AstPrinter.printAst(document);
+            // Use optimized AST cache for document to string conversion
+            String queryString = astCache.getOrPrint(document);
+            if (queryString == null) {
+                return document;
+            }
             
             // Extract target field name from path for direct string manipulation
             String[] pathParts = path.split("/");
@@ -123,15 +124,9 @@ public class AstManipulationUtils {
             // Direct string manipulation approach - more robust and generic
             String modifiedQuery = addFieldToQueryStringDirect(queryString, targetFieldName, fieldName);
             
-            // Parse the modified string back to a Document
-            try {
-                Parser parser = new Parser();
-                Document newDocument = parser.parseDocument(modifiedQuery);
-                return newDocument;
-            } catch (Exception parseError) {
-                // If parsing fails, return the original document
-                return document;
-            }
+            // Use optimized AST cache for string to document conversion
+            Document newDocument = astCache.getOrParse(modifiedQuery);
+            return newDocument != null ? newDocument : document;
             
         } catch (Exception e) {
             return document; // Return unchanged on error
@@ -144,11 +139,14 @@ public class AstManipulationUtils {
      */
     private static String addFieldToQueryStringDirect(String queryString, String targetFieldName, String fieldName) {
         try {
-            // Use regex to find the target field with its selection set
+            // Use optimized regex pool to find the target field with its selection set
             // Look for patterns like: targetFieldName { ... } or targetFieldName(...) { ... }
             // Use a more robust regex that handles nested braces correctly
             String regex = "\\b" + targetFieldName + "\\s*\\{";
-            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex, java.util.regex.Pattern.DOTALL);
+            java.util.regex.Pattern pattern = regexPool.getPattern(regex);
+            if (pattern == null) {
+                return queryString;
+            }
             java.util.regex.Matcher matcher = pattern.matcher(queryString);
             
             if (matcher.find()) {
@@ -184,10 +182,12 @@ public class AstManipulationUtils {
                     String indent = "    ";
                     // Look for the indentation pattern in the selection set
                     String selectionSet = queryString.substring(fieldStart, closingBracePos);
-                    java.util.regex.Pattern indentPattern = java.util.regex.Pattern.compile("\\n(\\s+)\\w");
-                    java.util.regex.Matcher indentMatcher = indentPattern.matcher(selectionSet);
-                    if (indentMatcher.find()) {
-                        indent = indentMatcher.group(1);
+                    java.util.regex.Pattern indentPattern = regexPool.getPattern("\\n(\\s+)\\w");
+                    if (indentPattern != null) {
+                        java.util.regex.Matcher indentMatcher = indentPattern.matcher(selectionSet);
+                        if (indentMatcher.find()) {
+                            indent = indentMatcher.group(1);
+                        }
                     }
                     
                     String result = beforeBrace + "\n" + indent + fieldName + afterBrace;
@@ -198,44 +198,48 @@ public class AstManipulationUtils {
             // If not found with selection set, try to find the field without selection set
             // This handles fields with arguments and directives
             String simpleRegex = "\\b" + targetFieldName + "\\b";
-            java.util.regex.Pattern simplePattern = java.util.regex.Pattern.compile(simpleRegex);
-            java.util.regex.Matcher simpleMatcher = simplePattern.matcher(queryString);
-            
-            if (simpleMatcher.find()) {
-                int fieldStart = simpleMatcher.start();
-                int fieldNameEnd = fieldStart + targetFieldName.length();
+            java.util.regex.Pattern simplePattern = regexPool.getPattern(simpleRegex);
+            if (simplePattern != null) {
+                java.util.regex.Matcher simpleMatcher = simplePattern.matcher(queryString);
                 
-                // Look for the opening brace after the field (handles arguments and directives)
-                int braceStart = queryString.indexOf("{", fieldNameEnd);
-                if (braceStart != -1) {
-                    // Find the closing brace
-                    int braceCount = 0;
-                    int closingBracePos = -1;
-                    for (int i = braceStart; i < queryString.length(); i++) {
-                        char c = queryString.charAt(i);
-                        if (c == '{') braceCount++;
-                        else if (c == '}') braceCount--;
-                        if (braceCount == 0) {
-                            closingBracePos = i;
-                            break;
-                        }
-                    }
+                if (simpleMatcher.find()) {
+                    int fieldStart = simpleMatcher.start();
+                    int fieldNameEnd = fieldStart + targetFieldName.length();
                     
-                    if (closingBracePos != -1) {
-                        // Determine proper indentation
-                        String indent = "    ";
-                        String selectionSet = queryString.substring(braceStart, closingBracePos);
-                        java.util.regex.Pattern indentPattern = java.util.regex.Pattern.compile("\\n(\\s+)\\w");
-                        java.util.regex.Matcher indentMatcher = indentPattern.matcher(selectionSet);
-                        if (indentMatcher.find()) {
-                            indent = indentMatcher.group(1);
+                    // Look for the opening brace after the field (handles arguments and directives)
+                    int braceStart = queryString.indexOf("{", fieldNameEnd);
+                    if (braceStart != -1) {
+                        // Find the closing brace
+                        int braceCount = 0;
+                        int closingBracePos = -1;
+                        for (int i = braceStart; i < queryString.length(); i++) {
+                            char c = queryString.charAt(i);
+                            if (c == '{') braceCount++;
+                            else if (c == '}') braceCount--;
+                            if (braceCount == 0) {
+                                closingBracePos = i;
+                                break;
+                            }
                         }
                         
-                        // Insert the new field before the closing brace
-                        String beforeClosingBrace = queryString.substring(0, closingBracePos);
-                        String afterClosingBrace = queryString.substring(closingBracePos);
-                        
-                        return beforeClosingBrace + "\n" + indent + fieldName + afterClosingBrace;
+                        if (closingBracePos != -1) {
+                            // Determine proper indentation
+                            String indent = "    ";
+                            String selectionSet = queryString.substring(braceStart, closingBracePos);
+                            java.util.regex.Pattern indentPattern = regexPool.getPattern("\\n(\\s+)\\w");
+                            if (indentPattern != null) {
+                                java.util.regex.Matcher indentMatcher = indentPattern.matcher(selectionSet);
+                                if (indentMatcher.find()) {
+                                    indent = indentMatcher.group(1);
+                                }
+                            }
+                            
+                            // Insert the new field before the closing brace
+                            String beforeClosingBrace = queryString.substring(0, closingBracePos);
+                            String afterClosingBrace = queryString.substring(closingBracePos);
+                            
+                            return beforeClosingBrace + "\n" + indent + fieldName + afterClosingBrace;
+                        }
                     }
                 }
             }
