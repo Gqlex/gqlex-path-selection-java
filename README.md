@@ -69,11 +69,11 @@ ValidationResult validation = new GraphQLValidator()
 
 | Feature | Description | Documentation |
 |---------|-------------|---------------|
-| **🔍 gqlXPath Navigation** | XPath-style path selection for GraphQL | [📖 gqlXPath Guide](src/main/java/com/intuit/gqlex/gqlxpath/README.md) |
-| **🔧 Query Transformation** | Programmatic query modification | [📖 Transformation Guide](src/main/java/com/intuit/gqlex/transformation/) |
+| **🔍 gqlXPath Navigation** | XPath-style path selection for GraphQL | [📖 gqlXPath Guide](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/gqlxpath/README.md) |
+| **🔧 Query Transformation** | Programmatic query modification | [📖 Transformation Guide](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/transformation/README.md) |
 | **✅ Validation & Linting** | Comprehensive GraphQL validation | [📖 Validation Guide](docs/GRAPHQL_VALIDATION_LINTING.md) |
-| **🚀 Performance Optimization** | AST caching and optimization | [📖 Performance Guide](src/main/java/com/intuit/gqlex/transformation/optimization/) |
-| **🎨 Query Templating** | Dynamic query generation | [📖 Templating Guide](src/main/java/com/intuit/gqlex/querytemplating/) |
+| **🚀 Performance Optimization** | AST caching and optimization | [📖 Performance Guide](https://github.com/Gqlex/gqlex-path-selection-java/tree/main/src/main/java/com/intuit/gqlex/transformation/optimization) |
+| **🎨 Query Templating** | Dynamic query generation | [📖 Templating Guide](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/querytemplating/README.md) |
 
 ## 🏗️ Architecture
 
@@ -89,14 +89,14 @@ gqlex/
 ## 📚 Documentation
 
 ### 🎯 **Core Features**
-- **[gqlXPath Navigation](src/main/java/com/intuit/gqlex/gqlxpath/README.md)** - XPath-style path selection for GraphQL documents
-- **[Query Transformation](src/main/java/com/intuit/gqlex/transformation/)** - Programmatic query modification with fluent API
+- **[gqlXPath Navigation](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/gqlxpath/README.md)** - XPath-style path selection for GraphQL documents
+- **[Query Transformation](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/transformation/README.md)** - Programmatic query modification with fluent API
 - **[Validation & Linting](docs/GRAPHQL_VALIDATION_LINTING.md)** - Comprehensive GraphQL validation system
-- **[Performance Optimization](src/main/java/com/intuit/gqlex/transformation/optimization/)** - AST caching and optimization strategies
-- **[Query Templating](src/main/java/com/intuit/gqlex/querytemplating/)** - Dynamic query generation with variables and conditions
+- **[Performance Optimization](https://github.com/Gqlex/gqlex-path-selection-java/tree/main/src/main/java/com/intuit/gqlex/transformation/optimization)** - AST caching and optimization strategies
+- **[Query Templating](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/querytemplating/README.md)** - Dynamic query generation with variables and conditions
 
 ### 🛠️ **Advanced Topics**
-- **[GraphQL Traversal](src/main/java/com/intuit/gqlex/traversal/README.md)** - Document traversal and observer patterns
+- **[GraphQL Traversal](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/src/main/java/com/intuit/gqlex/traversal/README.md)** - Document traversal and observer patterns
 - **[Integration Examples](docs/GRAPHQL_VALIDATION_LINTING.md#integration-patterns)** - API Gateway, CI/CD, Development Tools
 - **[Best Practices](docs/GRAPHQL_VALIDATION_LINTING.md#best-practices)** - Production deployment and optimization
 - **[Examples & Use Cases](docs/GRAPHQL_VALIDATION_LINTING.md#usage-examples)** - Real-world implementation examples
