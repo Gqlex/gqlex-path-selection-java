@@ -36,10 +36,13 @@ TransformationResult result = new GraphQLTransformer(query)
 - ✅ **Dynamic Query Building** - Modify queries at runtime
 - ✅ **API Versioning** - Transform queries for different versions
 - ✅ **Query Optimization** - Remove unnecessary fields
+- ✅ **GraphQL Validation** - ⭐ **NEW** - Comprehensive validation and security analysis
 - ✅ **Testing** - Verify GraphQL structure
 - ✅ **Documentation** - Generate field information
 
 **Ready to use with any GraphQL schema!** 🎯
+
+**📖 For detailed validation documentation, see [GraphQL Validation and Linting Guide](docs/GRAPHQL_VALIDATION_LINTING.md)**
 
 ## Table of Contents 📋
 
@@ -47,12 +50,14 @@ TransformationResult result = new GraphQLTransformer(query)
   - [GraphQL Traversal Engine](#-graphql-traversal-engine)
   - [gqlXPath Path Selection Language](#-gqlxpath-path-selection-language)
   - [GraphQL Query Transformation Engine](#-graphql-query-transformation-engine-new)
+  - [GraphQL Validation and Linting System](#-graphql-validation-and-linting-system-new)
   - [Advanced Capabilities](#-advanced-capabilities)
 - [Quick Start](#quick-start)
   - [Maven Dependency](#maven-dependency)
   - [Basic Usage](#basic-usage)
     - [Path Selection](#path-selection)
     - [Query Transformation](#query-transformation-new)
+    - [Query Validation](#query-validation-new)
 - [GraphQL Query Transformation Engine](#graphql-query-transformation-engine-new)
   - [Overview](#overview)
   - [Key Features](#key-features)
@@ -66,6 +71,11 @@ TransformationResult result = new GraphQLTransformer(query)
     - [Conditional Transformations](#conditional-transformations)
   - [Error Handling](#error-handling)
   - [Performance & Scalability](#performance--scalability)
+- [GraphQL Validation and Linting System](#graphql-validation-and-linting-system-new)
+  - [Overview](#overview-1)
+  - [Validation Rules](#validation-rules)
+  - [Usage Examples](#usage-examples-1)
+  - [Integration Patterns](#integration-patterns)
 - [gqlXPath Syntax](#gqlxpath-syntax)
   - [Path Expressions](#path-expressions)
   - [Element Selection](#element-selection)
@@ -110,6 +120,16 @@ TransformationResult result = new GraphQLTransformer(query)
 - **String-Based Transformation**: Optimized for performance and reliability
 - **Any Field Naming Convention**: Supports camelCase, snake_case, PascalCase, kebab-case, etc.
 - **Real-World Ready**: Tested with complex enterprise GraphQL schemas
+
+### 🔍 GraphQL Validation and Linting System ⭐ **NEW**
+- **Generic Validation**: Works with any GraphQL schema without hardcoded assumptions
+- **Security Analysis**: Detects SQL injection, XSS, DoS attacks, and introspection abuse
+- **Performance Optimization**: Identifies performance bottlenecks and provides optimization suggestions
+- **Structural Validation**: Ensures proper GraphQL document integrity and syntax
+- **Extensible Rules**: Easy to add custom validation rules for specific business needs
+- **Multi-Level Validation**: ERROR, WARNING, and INFO levels for comprehensive feedback
+- **Production Ready**: 100% test coverage with robust error handling
+- **Easy Integration**: Simple API for API gateways, development tools, and CI/CD pipelines
 
 ### 🔧 Advanced Capabilities
 - **Programmatic Path Building**: Fluent API for constructing path expressions
@@ -177,6 +197,33 @@ if (result.isSuccess()) {
 }
 ```
 
+#### Query Validation ⭐ **NEW**
+
+```java
+import com.intuit.gqlex.validation.core.GraphQLValidator;
+import com.intuit.gqlex.validation.rules.StructuralRule;
+import com.intuit.gqlex.validation.rules.PerformanceRule;
+import com.intuit.gqlex.validation.rules.SecurityRule;
+
+// Create validator with all rules
+GraphQLValidator validator = new GraphQLValidator()
+    .addRule(new StructuralRule())
+    .addRule(new PerformanceRule())
+    .addRule(new SecurityRule());
+
+// Validate any GraphQL query
+ValidationResult result = validator.validate(queryString);
+
+if (result.isValid()) {
+    System.out.println("✅ Query is valid!");
+} else {
+    System.out.println("❌ Validation errors: " + result.getErrorCount());
+    System.out.println("⚠️  Warnings: " + result.getWarningCount());
+}
+```
+
+**📖 For comprehensive validation examples and advanced usage, see [GraphQL Validation and Linting Guide](docs/GRAPHQL_VALIDATION_LINTING.md)**
+
 **Before & After Example:**
 
 **Original Query:**
@@ -207,6 +254,108 @@ query Hero($episode: Episode) {
 - ✅ **Removed field**: `friends` and its nested fields
 - ✅ **Added argument**: `limit: 10` to hero field
 - ✅ **Set alias**: `mainHero` for the hero field
+
+## GraphQL Validation and Linting System ⭐ **NEW**
+
+### Overview
+
+The **GraphQL Validation and Linting System** provides comprehensive validation capabilities for GraphQL documents. It's designed to be completely generic and schema-agnostic, making it perfect for production environments, development tools, and API gateways.
+
+### Key Features
+
+- **✅ 100% Generic**: Works with any GraphQL schema without hardcoded assumptions
+- **✅ Security Analysis**: Detects SQL injection, XSS, DoS attacks, and introspection abuse
+- **✅ Performance Optimization**: Identifies performance bottlenecks and provides optimization suggestions
+- **✅ Structural Validation**: Ensures proper GraphQL document integrity and syntax
+- **✅ Extensible Rules**: Easy to add custom validation rules for specific business needs
+- **✅ Multi-Level Validation**: ERROR, WARNING, and INFO levels for comprehensive feedback
+
+### Validation Rules
+
+#### Structural Rule
+Validates basic GraphQL document integrity and syntax.
+
+```java
+GraphQLValidator validator = new GraphQLValidator()
+    .addRule(new StructuralRule());
+
+ValidationResult result = validator.validate("query { user { name } }");
+assert result.isValid(); // ✅ Passes structural validation
+```
+
+#### Performance Rule
+Analyzes queries for performance issues and provides optimization suggestions.
+
+```java
+PerformanceRule performanceRule = new PerformanceRule(5, 50, 10); // max depth, fields, arguments
+GraphQLValidator validator = new GraphQLValidator().addRule(performanceRule);
+
+ValidationResult result = validator.validate(deepNestedQuery);
+if (result.hasWarnings()) {
+    result.getWarnings().forEach(warning -> 
+        System.out.println("Performance: " + warning.getMessage()));
+}
+```
+
+#### Security Rule
+Detects potential security vulnerabilities in GraphQL queries.
+
+```java
+GraphQLValidator validator = new GraphQLValidator()
+    .addRule(new SecurityRule());
+
+ValidationResult result = validator.validate(suspiciousQuery);
+if (!result.isValid()) {
+    result.getErrors().forEach(error -> 
+        System.out.println("Security: " + error.getMessage()));
+}
+```
+
+### Usage Examples
+
+#### API Gateway Integration
+```java
+public class GraphQLValidationMiddleware {
+    private final GraphQLValidator validator = new GraphQLValidator()
+        .addRule(new StructuralRule())
+        .addRule(new PerformanceRule(10, 100, 20))
+        .addRule(new SecurityRule());
+    
+    public boolean isRequestAllowed(String query) {
+        ValidationResult result = validator.validate(query);
+        return result.isValid(); // Block requests with errors
+    }
+}
+```
+
+#### Development Environment
+```java
+public class DevelopmentValidator {
+    private final GraphQLValidator validator = new GraphQLValidator()
+        .addRule(new StructuralRule())
+        .addRule(new PerformanceRule(5, 30, 5))  // Stricter limits
+        .addRule(new SecurityRule());
+    
+    public void validateQuery(String query, String fileName) {
+        ValidationResult result = validator.validate(query);
+        if (!result.isValid()) {
+            System.err.println("❌ Validation failed in " + fileName);
+            result.getErrors().forEach(error -> 
+                System.err.println("  " + error.getMessage()));
+        }
+    }
+}
+```
+
+### Integration Patterns
+
+The validation system integrates seamlessly with:
+- **API Gateways**: Validate incoming GraphQL requests
+- **Development Tools**: IDE plugins and linting tools
+- **CI/CD Pipelines**: Automated validation in build processes
+- **Production Monitoring**: Real-time validation and alerting
+
+**📖 For detailed documentation, see [GraphQL Validation and Linting Guide](docs/GRAPHQL_VALIDATION_LINTING.md)**
 
 ## GraphQL Query Transformation Engine ⭐ **NEW**
 
@@ -1363,15 +1512,21 @@ The engine is completely generic and works with any GraphQL schema:
 3. **Dynamic Query Building**: ⭐ **NEW** - Build queries based on runtime conditions
 4. **Query Optimization**: ⭐ **NEW** - Remove unnecessary fields or add required ones
 5. **API Versioning**: ⭐ **NEW** - Transform queries for different API versions
-6. **Validation**: Check for specific patterns in GraphQL documents
-7. **Testing**: Verify GraphQL query structure
-8. **Documentation Generation**: Extract field information
-9. **Multi-Tenant Applications**: ⭐ **NEW** - Customize queries per tenant
-10. **Feature Flags & A/B Testing**: ⭐ **NEW** - Enable/disable features dynamically
-11. **Data Masking & Privacy**: ⭐ **NEW** - Remove sensitive fields based on permissions
-12. **Internationalization**: ⭐ **NEW** - Add locale-specific fields
-13. **Microservices Integration**: ⭐ **NEW** - Route queries to different services
-14. **Caching Strategies**: ⭐ **NEW** - Create cache-specific query variations
+6. **GraphQL Validation**: ⭐ **NEW** - Comprehensive validation of GraphQL documents
+7. **Security Auditing**: ⭐ **NEW** - Detect security vulnerabilities in GraphQL queries
+8. **Performance Monitoring**: ⭐ **NEW** - Identify and optimize performance bottlenecks
+9. **Testing**: Verify GraphQL query structure and validation
+10. **Documentation Generation**: Extract field information
+11. **Multi-Tenant Applications**: ⭐ **NEW** - Customize queries per tenant
+12. **Feature Flags & A/B Testing**: ⭐ **NEW** - Enable/disable features dynamically
+13. **Data Masking & Privacy**: ⭐ **NEW** - Remove sensitive fields based on permissions
+14. **Internationalization**: ⭐ **NEW** - Add locale-specific fields
+15. **Microservices Integration**: ⭐ **NEW** - Route queries to different services
+16. **Caching Strategies**: ⭐ **NEW** - Create cache-specific query variations
+17. **API Gateway Integration**: ⭐ **NEW** - Validate incoming GraphQL requests
+18. **Development Tools**: ⭐ **NEW** - IDE plugins and linting tools
+19. **CI/CD Pipelines**: ⭐ **NEW** - Automated validation in build processes
+20. **Production Monitoring**: ⭐ **NEW** - Real-time validation and alerting
 
 ## Best Practices & Troubleshooting
 
@@ -1513,6 +1668,7 @@ For detailed documentation on specific features:
 - [GraphQL Traversal Details](src/main/java/com/intuit/gqlex/traversal/readme.md)
 - [gqlXPath Language Reference](src/main/java/com/intuit/gqlex/gqlxpath/readme.md)
 - [Query Transformation Engine](src/main/java/com/intuit/gqlex/transformation/) ⭐ **NEW**
+- [GraphQL Validation and Linting System](docs/GRAPHQL_VALIDATION_LINTING.md) ⭐ **NEW**
 
 ## Support
 
@@ -1524,6 +1680,6 @@ If you encounter any issues or have questions, please:
 
 ---
 
-**gqlex** brings the power and flexibility of XPath-style navigation and programmatic transformation to GraphQL, making it easier to work with GraphQL documents in Java applications.
+**gqlex** brings the power and flexibility of XPath-style navigation, programmatic transformation, and comprehensive validation to GraphQL, making it easier to work with GraphQL documents in Java applications.
 
 
