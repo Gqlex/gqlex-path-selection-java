@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -375,8 +376,8 @@ public class LintResultTest {
         List<OperationDefinition> operations = document.getDefinitions().stream()
             .filter(def -> def instanceof OperationDefinition)
             .map(def -> (OperationDefinition) def)
-            .toList();
-        
+            .collect(Collectors.toList());
+
         assertEquals(3, operations.size());
         
         // Test each operation type
