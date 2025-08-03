@@ -75,4 +75,7 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env 
+.env
+
+# Performance test files (generated during tests)
+src/test/resources/gqlex_samples/performance_tests/*.graphql 
