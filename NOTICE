@@ -1,0 +1,11 @@
+gqlex - Comprehensive GraphQL Utility Library for Java
+Copyright 2024 Yaron Karni
+
+This product includes software developed by:
+- Yaron Karni (https://github.com/Gqlex/gqlex-path-selection-java)
+
+This product includes third-party software developed by:
+- GraphQL Java (https://github.com/graphql-java/graphql-java) - Apache License 2.0
+- Apache Commons Lang (https://commons.apache.org/proper/commons-lang/) - Apache License 2.0
+- Google Gson (https://github.com/google/gson) - Apache License 2.0
+- JUnit Jupiter (https://junit.org/junit5/) - Eclipse Public License v2.0

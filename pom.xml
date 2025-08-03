@@ -3,7 +3,7 @@
 
     <groupId>com.intuit.gqlex</groupId>
     <artifactId>gqlex-path-selection-java</artifactId>
-    <version>2.0.1</version>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
     <name>GraphQL gqlex library</name>
     <url>https://github.com/gqlex</url>
@@ -11,6 +11,30 @@
     <description>
        Gqlex path selection and traversal
     </description>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Yaron Karni</name>
+            <email>yaron.karni@intuit.com</email>
+            <organization>Intuit</organization>
+            <organizationUrl>https://www.intuit.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/Gqlex/gqlex-path-selection-java.git</connection>
+        <developerConnection>scm:git:https://github.com/Gqlex/gqlex-path-selection-java.git</developerConnection>
+        <url>https://github.com/Gqlex/gqlex-path-selection-java</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
