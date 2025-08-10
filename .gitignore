@@ -78,4 +78,4 @@ node_modules/
 .env
 
 # Performance test files (generated during tests)
-src/test/resources/gqlex_samples/performance_tests/*.graphql 
+src/test/resources/graphql_samples/performance_tests/*.graphql 
