@@ -1,1 +1,0 @@
-query {  Instrument(id: "1234") }

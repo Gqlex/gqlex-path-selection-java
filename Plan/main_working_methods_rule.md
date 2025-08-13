@@ -1,0 +1,15 @@
+- all tests must passed
+- passed means 100% of the tests are successfully passed
+- you must do only what yoiu required to do
+- never commit and push changes rto git without explicit ask from the user
+- before commit and push you must verfiy tests passed
+- The code must remain generic, the solution must be generic nor specific, 
+- each new abilty must register in state memeory md file
+- these chages will helps you to creaste update md files and release notes
+- benchmark files are organized under src/test/resources/graphql_samples/benchmark/ directory
+- benchmark tests are now uncommented but configured to run only under the "benchmark" Maven profile
+- regular mvn test will NOT run benchmark tests (they are excluded by default)
+- to run benchmark tests, use: mvn test -P benchmark
+- benchmark test classes: SimplePerformanceTest, PerformanceComparisonTest, and benchmark methods in LazyXPathProcessorTest
+- benchmark tests use files from the benchmark/ directory for performance analysis
+- files that are served for tests should be under resources folder accordingly

@@ -1,0 +1,19 @@
+query MemoryTest {
+  users {
+    id
+    name
+    posts {
+      id
+      title
+      content
+      comments {
+        id
+        text
+        author {
+          id
+          name
+        }
+      }
+    }
+  }
+}

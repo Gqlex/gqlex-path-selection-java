@@ -40,7 +40,7 @@ class SelectorFacadeTest {
     void test_any_fragment_select_fragment_name() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -68,7 +68,7 @@ class SelectorFacadeTest {
     void test_any_fragment_select_spread_fragment_with_alias() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -102,7 +102,7 @@ class SelectorFacadeTest {
     void test_any_fragment_select_spread_fragment_without_alias() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -136,7 +136,7 @@ class SelectorFacadeTest {
     @Test
     void transform_mutation_add_child_under_alias() throws IOException {
         String fileName = "multi_simple_query_with_alias.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -163,7 +163,7 @@ class SelectorFacadeTest {
     @Test
     void transform_mutation_add_child_under_second_alias() throws IOException {
         String fileName = "multi_simple_query_with_alias.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -190,7 +190,7 @@ class SelectorFacadeTest {
     @Test
     void transform_mutation_alias_at_end() throws IOException {
         String fileName = "multi_simple_query_with_alias.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -216,7 +216,7 @@ class SelectorFacadeTest {
     @Test
     void transform_mutation_add_child_under_alias_with_no_alias() throws IOException {
         String fileName = "multi_simple_query_with_alias.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -245,7 +245,7 @@ class SelectorFacadeTest {
     void verify_select_with_any_a_b_c_any_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -271,7 +271,7 @@ class SelectorFacadeTest {
     void verify_select_with_any_a_any_mistake__c_d_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -298,7 +298,7 @@ class SelectorFacadeTest {
     void verify_select_with_any_a_single_between_multi_path_any__c_d_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables_check_any.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -327,7 +327,7 @@ class SelectorFacadeTest {
     void verify_select_multi_path_same_name_with_any_prefix() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables_check_any.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -355,7 +355,7 @@ class SelectorFacadeTest {
     void seldct_fields_with_any_multi_queries_different_path() throws IOException {
 
         String fileName = "multiple_queries_any_test.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -388,7 +388,7 @@ class SelectorFacadeTest {
     void seldct_fields_with_any_multi_queries_different_path_2() throws IOException {
 
         String fileName = "multiple_queries_any_test.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -421,7 +421,7 @@ class SelectorFacadeTest {
     void seldct_fields_with_any_multi_queries() throws IOException {
 
         String fileName = "multiple_queries_any_test.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -452,7 +452,7 @@ class SelectorFacadeTest {
     void verify_select_multi_path_same_group_under_hero_exclude_single() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables_check_any.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -480,7 +480,7 @@ class SelectorFacadeTest {
     void verify_select_with_any_a_any_c_d_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -507,7 +507,7 @@ class SelectorFacadeTest {
     void verify_select_with_any_a_any_any_d_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -535,7 +535,7 @@ class SelectorFacadeTest {
     void verify_select_with_a_any_d_any_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -562,7 +562,7 @@ class SelectorFacadeTest {
     void verify_select_with_any_e() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -589,7 +589,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_invalid_range_string_end_value() throws IOException {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
             String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -618,7 +618,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_invalid_range_string_start_value() throws IOException {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
             String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -647,7 +647,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_invalid_range_semicollon() throws IOException {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
             String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -676,7 +676,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_invalid_range_suffix() throws IOException {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
             String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -705,7 +705,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_invalid_range_prefix() throws IOException {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
             String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -734,7 +734,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_empty_range_values() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -760,7 +760,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_large_range_end_value() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -787,7 +787,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_large_range_end_value_with_large_start_value() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -809,7 +809,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_start_zero_and_end_is_empty() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -835,7 +835,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_start_and_end_is_empty() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -861,7 +861,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_end_and_start_is_empty() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -887,7 +887,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_start_and_end_equal() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -913,7 +913,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_start_and_end() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -939,7 +939,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_start_and_end_case_sen_hero_name() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -960,7 +960,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash_range_with_start_and_end_case_sen_middle_name() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -981,7 +981,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_double_slash() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1007,7 +1007,7 @@ class SelectorFacadeTest {
     void verify_select_single_path_one_slash() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1051,7 +1051,7 @@ mutation createCompany {
     void multi_select_intuit_real_mutation_select_names() throws IOException {
 
         String fileName = "multi_select_intuit_real_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1083,7 +1083,7 @@ mutation createCompany {
     void multi_select_intuit_real_mutation_select_names___diff_path() throws IOException {
 
         String fileName = "multi_select_intuit_real_mutation__diff.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1110,7 +1110,7 @@ mutation createCompany {
     void multi_select_verify_directive_path_diff() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables___diff_friends.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1138,7 +1138,7 @@ mutation createCompany {
     void multi_select_query_hero_example_directives_variables_select_main_field() throws IOException {
 
         String fileName = "multi_select_hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1164,7 +1164,7 @@ mutation createCompany {
     void multi_select_multiple_queries_select_field_first_query_argument_stringValue() throws IOException {
 
         String fileName = "multi_multiple_queries.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1199,7 +1199,7 @@ mutation createCompany {
     void select_multi_simple_different_path_size_1() throws IOException {
 
         String fileName = "multi_diff_path_size_1_simple_query_with_body_and_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1226,7 +1226,7 @@ mutation createCompany {
     void select_multi_simple() throws IOException {
 
         String fileName = "multi_simple_query_with_body_and_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1257,7 +1257,7 @@ mutation createCompany {
     void select_many_nodes_flat() throws IOException {
 
         String fileName = "simple_many_nodes.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1280,7 +1280,7 @@ mutation createCompany {
     void verify_path_with_empty_name_illegal_exception() throws IOException {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
             String fileName = "simple_query_with_body_and_arg.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1302,7 +1302,7 @@ mutation createCompany {
         Exception exception = assertThrows(GqlSelectionSyntaxException.class, () -> {
 
             String fileName = "simple_query_with_body_and_arg.txt";
-            String testFolder = "gqlex_samples";
+            String testFolder = "graphql_samples/original_tests";
 
             ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1322,7 +1322,7 @@ mutation createCompany {
     void verify_path_with_empty_name_redundant_slash_at_end_NO_exception() throws IOException {
 
         String fileName = "simple_query_with_body_and_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1346,7 +1346,7 @@ mutation createCompany {
     void verify_path_with_empty_name_redundant_slash_at_end_NO_exception____use_of_syntaxPath() throws IOException {
 
         String fileName = "simple_query_with_body_and_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1379,7 +1379,7 @@ mutation createCompany {
     void select_body_fields_select_leaf_field() throws IOException {
 
         String fileName = "simple_query_with_body_and_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1402,7 +1402,7 @@ mutation createCompany {
     void select_body_fields_select_parent_leaf_field() throws IOException {
 
         String fileName = "simple_query_with_body_and_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1426,7 +1426,7 @@ mutation createCompany {
     void select_simple_query_only_arg() throws IOException {
 
         String fileName = "simple_query_only_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1449,7 +1449,7 @@ mutation createCompany {
     void select_simple_query_only_arg_select_second_field_spaces_in_the_name() throws IOException {
 
         String fileName = "simple_query_only_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1472,7 +1472,7 @@ mutation createCompany {
     void select_simple_query_only_arg_select_second_field() throws IOException {
 
         String fileName = "simple_query_only_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1495,7 +1495,7 @@ mutation createCompany {
     void select_simple_query_only_arg_unorder_path_inexist() throws IOException {
 
         String fileName = "simple_query_only_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1516,7 +1516,7 @@ mutation createCompany {
     void select_simple_query_only_arg_select_inner_field_id_not_exist() throws IOException {
 
         String fileName = "simple_query_only_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1537,7 +1537,7 @@ mutation createCompany {
     void select_simple_query_only_arg_select_inner_arg_id_exist() throws IOException {
 
         String fileName = "simple_query_only_arg.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1563,7 +1563,7 @@ mutation createCompany {
     void duplicate_fields_name_select_arg_case_sensitive() throws IOException {
 
         String fileName = "duplicate_field_names.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1588,7 +1588,7 @@ mutation createCompany {
     void duplicate_fields_name_select_arg_case_insensitive() throws IOException {
 
         String fileName = "duplicate_field_names.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1610,7 +1610,7 @@ mutation createCompany {
     void duplicate_fields_name_select_arg_upper_case_name() throws IOException {
 
         String fileName = "duplicate_field_names.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1682,7 +1682,7 @@ mutation createCompany {
     void hero_example_directives_variables_select_main_field() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1709,7 +1709,7 @@ mutation createCompany {
     void hero_example_directives_variables_select_main_field_variable() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1735,7 +1735,7 @@ mutation createCompany {
     void hero_example_directives_variables_select_field__second_variable() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1760,7 +1760,7 @@ mutation createCompany {
     void select_var_ref_under_field() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1785,7 +1785,7 @@ mutation createCompany {
     void select_field() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1810,7 +1810,7 @@ mutation createCompany {
     void select_friends_with_directive() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1835,7 +1835,7 @@ mutation createCompany {
     void select_friends_with_directive_select_inner_directive() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1859,7 +1859,7 @@ mutation createCompany {
     void select_friends_with_directive_select_inner_directive_inner_arg() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1884,7 +1884,7 @@ mutation createCompany {
     void select_friends_with_directive_leaf_node() throws IOException {
 
         String fileName = "hero_example_directives_variables.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1931,7 +1931,7 @@ mutation createCompany {
     void multiple_queries_select_field_first_query_argument_stringValue() throws IOException {
 
         String fileName = "multiple_queries.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1965,7 +1965,7 @@ mutation createCompany {
     void multiple_queries_select_field_second_query_select_field() throws IOException {
 
         String fileName = "multiple_queries.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -1992,7 +1992,7 @@ mutation createCompany {
     void multiple_queries_select_field_second_query_var_with_argument_objectValue() throws IOException {
 
         String fileName = "multiple_queries.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2040,7 +2040,7 @@ mutation createCompany {
     void check_limit_arg() throws IOException {
 
         String fileName = "limit.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2067,7 +2067,7 @@ mutation createCompany {
     void multiple_queries_select_field_second_query_1() throws IOException {
 
         String fileName = "multiple_queries.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2092,7 +2092,7 @@ mutation createCompany {
     void multiple_queries_select_field_second_query_2() throws IOException {
 
         String fileName = "multiple_queries.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2141,7 +2141,7 @@ fragment comparisonFields on Character {
     void query_select_field_by_alias_first_query() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2190,7 +2190,7 @@ fragment comparisonFields on Character {
     void query_select_fragment() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2234,7 +2234,7 @@ fragment comparisonFields on Character {
     void query_select_inline_fragment_select_canonical_field() throws IOException {
 
         String fileName = "inline_frag.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2260,7 +2260,7 @@ fragment comparisonFields on Character {
     void query_select_fragment_select_cannonical_field() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2284,7 +2284,7 @@ fragment comparisonFields on Character {
     void query_select_fragment_select_field() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2308,7 +2308,7 @@ fragment comparisonFields on Character {
     void query_select_field_by_alias_second_query() throws IOException {
 
         String fileName = "query_with_fragments.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2337,7 +2337,7 @@ fragment comparisonFields on Character {
     void verify_simple_mutation() throws IOException {
 
         String fileName = "simple_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2361,7 +2361,7 @@ fragment comparisonFields on Character {
     void verify_simple_mutation_select_node() throws IOException {
 
         String fileName = "simple_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2385,7 +2385,7 @@ fragment comparisonFields on Character {
     void verify_simple_mutation_select_inner_node() throws IOException {
 
         String fileName = "simple_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2411,7 +2411,7 @@ fragment comparisonFields on Character {
     void verify_simple_mutation_select_arg() throws IOException {
 
         String fileName = "simple_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2435,7 +2435,7 @@ fragment comparisonFields on Character {
     void verify_simple_mutation_select_var() throws IOException {
 
         String fileName = "simple_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2459,7 +2459,7 @@ fragment comparisonFields on Character {
     void select_input_mutation_real_intuit_sample() throws IOException {
 
         String fileName = "intuit_real_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 
@@ -2483,7 +2483,7 @@ fragment comparisonFields on Character {
     void select_field_mutation_real_intuit_sample() throws IOException {
 
         String fileName = "intuit_real_mutation.txt";
-        String testFolder = "gqlex_samples";
+        String testFolder = "graphql_samples/original_tests";
 
         ClassLoader classLoader = this.getClass().getClassLoader();
 

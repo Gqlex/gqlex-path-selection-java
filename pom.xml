@@ -3,7 +3,7 @@
 
     <groupId>com.intuit.gqlex</groupId>
     <artifactId>gqlex-path-selection-java</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.2</version>
     <packaging>jar</packaging>
     <name>GraphQL gqlex library</name>
     <url>https://github.com/gqlex</url>
@@ -45,7 +45,7 @@
         <junit.version>5.7.2</junit.version>
         <jacoco.enabled>true</jacoco.enabled>
         <jacoco.version>0.8.8</jacoco.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
         <central.repo>https://mvnrepository.com/artifact/</central.repo>
@@ -181,6 +181,13 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludedTags>benchmark</excludedTags>
+                </configuration>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -222,4 +229,86 @@
             <layout>default</layout>
         </repository>
     </distributionManagement>
+
+    <!-- Profiles for different test configurations -->
+    <profiles>
+        <!-- Fast tests profile - runs only quick tests by default -->
+        <profile>
+            <id>fast</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/LazyXPathProcessorTest.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/*Performance*.java</exclude>
+                                <exclude>**/*Benchmark*.java</exclude>
+                                <exclude>**/GraphQLLinterTest.java</exclude>
+                                <exclude>**/SelectorFacadeTest.java</exclude>
+                                <exclude>**/SearchPathBuilderTest.java</exclude>
+                                <exclude>**/SearchPathElementTest.java</exclude>
+                                <exclude>**/SyntaxPathTest.java</exclude>
+                                <exclude>**/eXtendGqlBuilderTest.java</exclude>
+                                <exclude>**/QueryTemplateTest.java</exclude>
+                                <exclude>**/LintResultTest.java</exclude>
+                                <exclude>**/LintPresetTest.java</exclude>
+                                <exclude>**/StyleRuleTest.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <!-- Benchmark profile - runs only performance tests -->
+        <profile>
+            <id>benchmark</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/*Performance*.java</include>
+                                <include>**/*Benchmark*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <benchmark.mode>true</benchmark.mode>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
+        <!-- All tests profile - runs everything -->
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <!-- No exclusions, runs all tests -->
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

@@ -1,0 +1,41 @@
+query GetUserWithFragments {
+  user(id: "123") {
+    ...userFields
+    ... on Admin {
+      permissions {
+        role
+        level
+      }
+    }
+    posts {
+      ...postFields
+      comments {
+        ...commentFields
+      }
+    }
+  }
+}
+fragment userFields on User {
+  id
+  name
+  email
+    profile {
+      bio
+      avatar
+    }
+  }
+}
+fragment postFields on Post {
+  id
+  title
+  content
+  createdAt
+}
+fragment commentFields on Comment {
+  id
+  text
+  author {
+    id
+    name
+  }
+}

@@ -1,0 +1,24 @@
+query GetUserWithPosts {
+  user(id: "123") {
+    id
+    name
+    email
+    profile {
+      bio
+      avatar
+    }
+    posts {
+      id
+      title
+      content
+      comments {
+        id
+        text
+        author {
+          id
+          name
+        }
+      }
+    }
+  }
+}

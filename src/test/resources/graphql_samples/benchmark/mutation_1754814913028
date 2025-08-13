@@ -1,0 +1,30 @@
+mutation CreateUserWithProfile {
+  createUser(input: {
+    name: "John Doe"
+    email: "john@example.com"
+    profile: {
+      bio: "Software Developer"
+      avatar: "https://example.com/avatar.jpg"
+    }
+  }) {
+    id
+    name
+    email
+    profile {
+      bio
+      avatar
+    }
+  }
+  updateUser(id: "456", input: {
+    name: "Jane Smith"
+    profile: {
+      bio: "Product Manager"
+    }
+  }) {
+    id
+    name
+    profile {
+      bio
+    }
+  }
+}

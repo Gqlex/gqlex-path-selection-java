@@ -1,0 +1,14 @@
+query CachedQuery {
+  user(id: "123") {
+    id
+    name
+    posts {
+      id
+      title
+      comments {
+        id
+        text
+      }
+    }
+  }
+}

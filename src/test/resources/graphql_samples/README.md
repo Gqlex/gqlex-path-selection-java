@@ -16,6 +16,16 @@ graphql_samples/
 │   ├── multiple_xpath_*.graphql # Multiple xpath processing tests
 │   ├── memory_test_*.graphql  # Memory usage analysis tests
 │   └── cache_cold_*.graphql   # Cache performance tests
+├── benchmark/                  # Benchmark test files (generated during testing)
+│   ├── README.md              # Benchmark documentation
+│   ├── complex_nested_*       # Complex nested query benchmarks
+│   ├── cache_cold_*           # Cache performance benchmarks
+│   ├── large_document_*       # Large document benchmarks
+│   ├── memory_test_*          # Memory usage benchmarks
+│   ├── mutation_*             # Mutation benchmarks
+│   ├── simple_query_*         # Simple query benchmarks
+│   ├── multiple_xpath_*       # Multiple xpath benchmarks
+│   └── fragment_query_*       # Fragment query benchmarks
 └── original_tests/            # Original test files (.txt)
     ├── payload/               # Payload test files
     │   └── kiril_payload.txt  # Kiril payload test

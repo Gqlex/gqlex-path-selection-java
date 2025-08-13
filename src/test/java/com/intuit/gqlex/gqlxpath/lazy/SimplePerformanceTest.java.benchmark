@@ -1,0 +1,303 @@
+package com.intuit.gqlex.gqlxpath.lazy;
+
+import com.intuit.gqlex.common.GqlNodeContext;
+import com.intuit.gqlex.gqlxpath.selector.SelectorFacade;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tag;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Simple performance comparison between lazy loading and traditional gqlXPath processing.
+ * 
+ * @author gqlex
+ * @version 2.0.1
+ * @since 2.0.1
+ * 
+ * NOTE: This test class is commented out to avoid running performance tests during regular test runs.
+ * To run performance benchmarks, uncomment this class and run the specific test methods.
+ */
+@DisplayName("Simple Performance Comparison - Lazy vs Traditional gqlXPath")
+public class SimplePerformanceTest {
+    
+    private LazyXPathProcessor lazyProcessor;
+    private SelectorFacade traditionalProcessor;
+    
+    @BeforeEach
+    void setUp() {
+        lazyProcessor = new LazyXPathProcessor();
+        traditionalProcessor = new SelectorFacade();
+    }
+    
+    @Test
+    @Tag("benchmark")
+    @DisplayName("Simple Query Performance Comparison")
+    void testSimpleQueryPerformance() {
+        String simpleQuery = 
+            "query GetUser {\n" +
+            "  user(id: \"123\") {\n" +
+            "    id\n" +
+            "    name\n" +
+            "    email\n" +
+            "  }\n" +
+            "}\n";
+        
+        String xpath = "//user";
+        
+        // Save query to temporary file
+        String documentId = "simple_query_" + System.currentTimeMillis();
+        try {
+            Files.write(Paths.get(documentId), simpleQuery.getBytes());
+        } catch (IOException e) {
+            fail("Failed to write test file: " + e.getMessage());
+        }
+        
+        // Measure traditional processing
+        long traditionalStart = System.nanoTime();
+        List<GqlNodeContext> traditionalResult = traditionalProcessor.selectMany(simpleQuery, xpath);
+        long traditionalEnd = System.nanoTime();
+        long traditionalTime = TimeUnit.NANOSECONDS.toMillis(traditionalEnd - traditionalStart);
+        
+        // Measure lazy processing
+        long lazyStart = System.nanoTime();
+        LazyXPathProcessor.LazyXPathResult lazyResult = lazyProcessor.processXPath(documentId, xpath);
+        long lazyEnd = System.nanoTime();
+        long lazyTime = TimeUnit.NANOSECONDS.toMillis(lazyEnd - lazyStart);
+        
+        // Verify results match
+        assertTrue(lazyResult.isSuccess(), "Lazy processing should succeed");
+        assertNotNull(lazyResult.getResult(), "Lazy result should not be null");
+        assertEquals(traditionalResult.size(), lazyResult.getResult().size(), 
+            "Results should match between traditional and lazy processing");
+        
+        // Performance assertions
+        assertTrue(lazyTime > 0, "Lazy processing time should be measurable");
+        assertTrue(traditionalTime > 0, "Traditional processing time should be measurable");
+        
+        System.out.println("=== Simple Query Performance ===");
+        System.out.println("Traditional Time: " + traditionalTime + "ms");
+        System.out.println("Lazy Time: " + lazyTime + "ms");
+        System.out.println("Speedup: " + String.format("%.2fx", (double) traditionalTime / lazyTime));
+        System.out.println("Traditional Results: " + traditionalResult.size());
+        System.out.println("Lazy Results: " + lazyResult.getResult().size());
+        
+        // Clean up
+        try {
+            Files.deleteIfExists(Paths.get(documentId));
+        } catch (IOException e) {
+            // Ignore cleanup errors
+        }
+    }
+    
+    @Test
+    @Tag("benchmark")
+    @DisplayName("Complex Query Performance Comparison")
+    void testComplexQueryPerformance() {
+        String complexQuery = 
+            "query GetUserWithPosts {\n" +
+            "  user(id: \"123\") {\n" +
+            "    id\n" +
+            "    name\n" +
+            "    email\n" +
+            "    profile {\n" +
+            "      bio\n" +
+            "      avatar\n" +
+            "    }\n" +
+            "    posts {\n" +
+            "      id\n" +
+            "      title\n" +
+            "      content\n" +
+            "      comments {\n" +
+            "        id\n" +
+            "        text\n" +
+            "        author {\n" +
+            "          id\n" +
+            "          name\n" +
+            "        }\n" +
+            "      }\n" +
+            "    }\n" +
+            "  }\n" +
+            "}\n";
+        
+        String xpath = "//user//posts//comments";
+        
+        // Save query to temporary file
+        String documentId = "complex_query_" + System.currentTimeMillis();
+        try {
+            Files.write(Paths.get(documentId), complexQuery.getBytes());
+        } catch (IOException e) {
+            fail("Failed to write test file: " + e.getMessage());
+        }
+        
+        // Measure traditional processing
+        long traditionalStart = System.nanoTime();
+        List<GqlNodeContext> traditionalResult = traditionalProcessor.selectMany(complexQuery, xpath);
+        long traditionalEnd = System.nanoTime();
+        long traditionalTime = TimeUnit.NANOSECONDS.toMillis(traditionalEnd - traditionalStart);
+        
+        // Measure lazy processing
+        long lazyStart = System.nanoTime();
+        LazyXPathProcessor.LazyXPathResult lazyResult = lazyProcessor.processXPath(documentId, xpath);
+        long lazyEnd = System.nanoTime();
+        long lazyTime = TimeUnit.NANOSECONDS.toMillis(lazyEnd - lazyStart);
+        
+        // Verify results match
+        assertTrue(lazyResult.isSuccess(), "Lazy processing should succeed");
+        assertNotNull(lazyResult.getResult(), "Lazy result should not be null");
+        assertEquals(traditionalResult.size(), lazyResult.getResult().size(), 
+            "Results should match between traditional and lazy processing");
+        
+        System.out.println("=== Complex Query Performance ===");
+        System.out.println("Traditional Time: " + traditionalTime + "ms");
+        System.out.println("Lazy Time: " + lazyTime + "ms");
+        System.out.println("Speedup: " + String.format("%.2fx", (double) traditionalTime / lazyTime));
+        System.out.println("Traditional Results: " + traditionalResult.size());
+        System.out.println("Lazy Results: " + lazyResult.getResult().size());
+        
+        // Clean up
+        try {
+            Files.deleteIfExists(Paths.get(documentId));
+        } catch (IOException e) {
+            // Ignore cleanup errors
+        }
+    }
+    
+    @Test
+    @Tag("benchmark")
+    @DisplayName("Memory Usage Comparison")
+    void testMemoryUsageComparison() {
+        String query = 
+            "query MemoryTest {\n" +
+            "  users {\n" +
+            "    id\n" +
+            "    name\n" +
+            "    posts {\n" +
+            "      id\n" +
+            "      title\n" +
+            "      content\n" +
+            "      comments {\n" +
+            "        id\n" +
+            "        text\n" +
+            "        author {\n" +
+            "          id\n" +
+            "          name\n" +
+            "        }\n" +
+            "      }\n" +
+            "    }\n" +
+            "  }\n" +
+            "}\n";
+        
+        String xpath = "//users//posts//comments";
+        
+        // Save query to temporary file
+        String documentId = "memory_test_" + System.currentTimeMillis();
+        try {
+            Files.write(Paths.get(documentId), query.getBytes());
+        } catch (IOException e) {
+            fail("Failed to write test file: " + e.getMessage());
+        }
+        
+        // Force garbage collection before measurement
+        System.gc();
+        
+        // Traditional memory measurement
+        long traditionalMemoryBefore = getMemoryUsage();
+        List<GqlNodeContext> traditionalResult = traditionalProcessor.selectMany(query, xpath);
+        long traditionalMemoryAfter = getMemoryUsage();
+        long traditionalMemoryUsage = traditionalMemoryAfter - traditionalMemoryBefore;
+        
+        // Force garbage collection
+        System.gc();
+        
+        // Lazy memory measurement
+        long lazyMemoryBefore = getMemoryUsage();
+        LazyXPathProcessor.LazyXPathResult lazyResult = lazyProcessor.processXPath(documentId, xpath);
+        long lazyMemoryAfter = getMemoryUsage();
+        long lazyMemoryUsage = lazyMemoryAfter - lazyMemoryBefore;
+        
+        // Verify results match
+        assertTrue(lazyResult.isSuccess(), "Lazy processing should succeed");
+        assertEquals(traditionalResult.size(), lazyResult.getResult().size(), 
+            "Results should match between traditional and lazy processing");
+        
+        double memoryReductionPercentage = ((double) (traditionalMemoryUsage - lazyMemoryUsage) / traditionalMemoryUsage) * 100;
+        double memoryEfficiencyFactor = (double) traditionalMemoryUsage / lazyMemoryUsage;
+        
+        System.out.println("=== Memory Usage Comparison ===");
+        System.out.println("Traditional Memory: " + traditionalMemoryUsage + " bytes");
+        System.out.println("Lazy Memory: " + lazyMemoryUsage + " bytes");
+        System.out.println("Memory Reduction: " + String.format("%.1f%%", memoryReductionPercentage));
+        System.out.println("Memory Efficiency: " + String.format("%.2fx", memoryEfficiencyFactor));
+        
+        // Clean up
+        try {
+            Files.deleteIfExists(Paths.get(documentId));
+        } catch (IOException e) {
+            // Ignore cleanup errors
+        }
+    }
+    
+    @Test
+    @Tag("benchmark")
+    @DisplayName("Performance Comparison with Built-in Method")
+    void testBuiltInPerformanceComparison() {
+        String query = 
+            "query BuiltInTest {\n" +
+            "  user(id: \"123\") {\n" +
+            "    id\n" +
+            "    name\n" +
+            "    posts {\n" +
+            "      id\n" +
+            "      title\n" +
+            "    }\n" +
+            "  }\n" +
+            "}\n";
+        
+        String xpath = "//user//posts";
+        
+        // Save query to temporary file
+        String documentId = "builtin_test_" + System.currentTimeMillis();
+        try {
+            Files.write(Paths.get(documentId), query.getBytes());
+        } catch (IOException e) {
+            fail("Failed to write test file: " + e.getMessage());
+        }
+        
+        // Use the built-in comparison method
+        LazyXPathProcessor.PerformanceComparison comparison = lazyProcessor.compareWithTraditional(documentId, xpath);
+        
+        // Verify comparison results
+        assertNotNull(comparison, "Performance comparison should not be null");
+        assertTrue(comparison.getTraditionalTime() > 0, "Traditional time should be measurable");
+        assertTrue(comparison.getLazyTime() > 0, "Lazy time should be measurable");
+        assertTrue(comparison.getImprovementPercentage() >= 0, "Improvement percentage should be non-negative");
+        
+        System.out.println("=== Built-in Performance Comparison ===");
+        System.out.println("Traditional Time: " + comparison.getTraditionalTime() + "ms");
+        System.out.println("Lazy Time: " + comparison.getLazyTime() + "ms");
+        System.out.println("Improvement: " + String.format("%.1f%%", comparison.getImprovementPercentage()));
+        System.out.println("Is Lazy Faster: " + comparison.isLazyFaster());
+        System.out.println("Results Match: " + comparison.resultsMatch());
+        
+        // Clean up
+        try {
+            Files.deleteIfExists(Paths.get(documentId));
+        } catch (IOException e) {
+            // Ignore cleanup errors
+        }
+    }
+    
+    private long getMemoryUsage() {
+        Runtime runtime = Runtime.getRuntime();
+        return runtime.totalMemory() - runtime.freeMemory();
+    }
+}

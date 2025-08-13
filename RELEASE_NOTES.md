@@ -40,6 +40,7 @@ This release introduces a revolutionary **Lazy Loading gqlXPath system** that pr
 - 2-6x speedup across all query types
 - 60-95% memory reduction
 - Intelligent caching and predictive loading
+- **Benchmark Test System** - Comprehensive performance testing framework
 
 ### 📋 **New Features Since v2.0.1**
 
@@ -50,6 +51,7 @@ This release introduces a revolutionary **Lazy Loading gqlXPath system** that pr
 - **XPathAnalysis** - Comprehensive xpath component analysis
 - **DocumentSection** - Memory-efficient document section representation
 - **Performance comparison tools** - Built-in performance analysis
+- **Benchmark Test Framework** - Comprehensive performance testing system
 
 #### 🔧 **Performance Optimizations**
 - **AST Caching** - Reduces parsing overhead by 80%
@@ -98,6 +100,15 @@ This release introduces a revolutionary **Lazy Loading gqlXPath system** that pr
 - **PERFORMANCE_SUMMARY.md** - Detailed performance analysis
 - **GraphQL Validation & Linting Guide** - Complete validation system documentation
 - **Security System Documentation** - Comprehensive security features guide
+- **BENCHMARK_EXECUTION_GUIDE.md** - Complete benchmark testing guide
+
+#### 🧪 **Benchmark Test System**
+- **Maven Profile Configuration** - `-P benchmark` for running performance tests
+- **Performance Test Classes** - SimplePerformanceTest, PerformanceComparisonTest
+- **Benchmark File Organization** - Structured benchmark test files under `src/test/resources/graphql_samples/benchmark/`
+- **Performance Metrics Collection** - Execution time, memory usage, speedup factors
+- **Smart Test Separation** - Fast tests for regular runs, benchmark tests for performance analysis
+- **Comprehensive Coverage** - Query complexity, document size, cache performance, memory usage tests
 - **Architecture components** and use cases documentation
 - **Migration guide** and best practices
 
