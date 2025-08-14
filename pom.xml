@@ -3,7 +3,7 @@
 
     <groupId>com.intuit.gqlex</groupId>
     <artifactId>gqlex-path-selection-java</artifactId>
-    <version>3.0.2</version>
+    <version>3.1.0</version>
     <packaging>jar</packaging>
     <name>GraphQL gqlex library</name>
     <url>https://github.com/gqlex</url>
@@ -43,8 +43,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <junit.version>5.7.2</junit.version>
-        <jacoco.enabled>false</jacoco.enabled>
-        <jacoco.version>0.8.11</jacoco.version>
+        <jacoco.enabled>true</jacoco.enabled>
+        <jacoco.version>0.8.13</jacoco.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
@@ -153,7 +153,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Temporarily disabled due to Java 21 compatibility issues
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -177,7 +176,6 @@
                     <enabled>${jacoco.enabled}</enabled>
                 </configuration>
             </plugin>
-            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

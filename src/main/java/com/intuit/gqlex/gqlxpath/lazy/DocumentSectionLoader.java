@@ -54,7 +54,7 @@ public class DocumentSectionLoader {
      * Load only the required content from document
      */
     private String loadRequiredContent(String documentId, XPathAnalysis analysis) throws IOException {
-        Set<String> requiredSections = analysis.getRequiredSections();
+        Set<String> requiredSections = analysis.getRequiredSectionsSet();
         
         if (requiredSections.isEmpty()) {
             // If no specific sections required, load minimal content
