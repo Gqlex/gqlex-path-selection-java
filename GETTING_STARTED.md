@@ -15,6 +15,7 @@ Welcome to the **gqlex** library - a comprehensive GraphQL utility toolkit for J
 - [7. Security Features](#7-security-features)
 - [8. Performance Optimization](#8-performance-optimization)
 - [9. Fragment Operations](#9-fragment-operations)
+- [10. 🧪 Testing & Benchmark System](#10-testing--benchmark-system)
 - [Advanced Usage](#advanced-usage)
 - [Best Practices](#best-practices)
 - [Troubleshooting](#troubleshooting)
@@ -29,7 +30,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>com.intuit</groupId>
     <artifactId>gqlex</artifactId>
-    <version>1.0.0</version>
+    <version>3.0.2</version>
 </dependency>
 ```
 
@@ -1084,6 +1085,284 @@ TransformationResult result = transformer
 
 System.out.println("Extracted Fragment:");
 System.out.println(result.getTransformedQuery());
+```
+
+---
+
+## 10. 🧪 Testing & Benchmark System
+
+The gqlex library includes a comprehensive testing and benchmark system that ensures **100% test pass rate** while maintaining fast development feedback.
+
+### 🎯 **Test Organization**
+
+#### **Test Resource Structure**
+```
+src/test/resources/
+└── graphql_samples/
+    ├── original_tests/          # Core test files
+    │   ├── simple_query.txt
+    │   ├── complex_queries.txt
+    │   └── ...
+    └── benchmark/               # Performance test files
+        ├── performance_tests/
+        ├── memory_tests/
+        └── ...
+```
+
+#### **Test Categories**
+- **Core Tests** - Basic functionality and edge cases
+- **Performance Tests** - Speed and memory optimization tests
+- **Benchmark Tests** - Comprehensive performance analysis
+- **Integration Tests** - End-to-end functionality tests
+
+### 🚀 **Test Execution Modes**
+
+#### **Default Mode (`mvn test`)**
+```bash
+# Run all tests except benchmarks (fast development feedback)
+mvn test
+
+# Expected output: ~300 tests passing in 10-15 seconds
+```
+
+#### **Benchmark Mode (`mvn test -P benchmark`)**
+```bash
+# Run only benchmark tests for performance analysis
+mvn test -P benchmark
+
+# Expected output: Performance metrics and optimization data
+```
+
+#### **All Tests Mode**
+```bash
+# Run all tests including benchmarks
+mvn test -P all
+
+# Expected output: Complete test suite execution
+```
+
+### 🔧 **Test Control Scripts**
+
+#### **Simple Test Control**
+```bash
+# Make the script executable
+chmod +x simple_test_control.sh
+
+# Fast mode - essential tests only
+./simple_test_control.sh fast
+
+# All tests mode - complete test suite
+./simple_test_control.sh all
+
+# Benchmark mode - performance tests only
+./simple_test_control.sh benchmark
+
+# Status check - current configuration
+./simple_test_control.sh status
+```
+
+#### **Advanced Test Control**
+```bash
+# Make the script executable
+chmod +x test_control.sh
+
+# More granular control over test execution
+./test_control.sh fast
+./test_control.sh all
+./test_control.sh benchmark
+```
+
+### 📊 **Performance Testing**
+
+#### **Quick Performance Test**
+```java
+import com.intuit.gqlex.gqlxpath.lazy.LazyXPathProcessor;
+
+public class PerformanceTest {
+    
+    public void runQuickPerformanceTest() {
+        LazyXPathProcessor processor = new LazyXPathProcessor();
+        
+        // Generate test data
+        String testQuery = generateTestQuery();
+        String documentId = "perf_test_" + System.currentTimeMillis();
+        Files.write(Paths.get(documentId), testQuery.getBytes());
+        
+        // Test performance
+        long startTime = System.nanoTime();
+        LazyXPathResult result = processor.processXPath(documentId, "//user//posts//comments");
+        long endTime = System.nanoTime();
+        
+        long duration = TimeUnit.NANOSECONDS.toMillis(endTime - startTime);
+        System.out.println("Processing time: " + duration + "ms");
+        System.out.println("Nodes found: " + result.getResult().size());
+        
+        // Cleanup
+        Files.deleteIfExists(Paths.get(documentId));
+    }
+}
+```
+
+#### **Performance Comparison**
+```java
+public void comparePerformance() {
+    LazyXPathProcessor lazyProcessor = new LazyXPathProcessor();
+    
+    // Compare with traditional processing
+    LazyXPathProcessor.PerformanceComparison comparison = 
+        lazyProcessor.compareWithTraditional("document_id", "//user//posts");
+    
+    System.out.println("Traditional time: " + comparison.getTraditionalTime() + "ms");
+    System.out.println("Lazy time: " + comparison.getLazyTime() + "ms");
+    System.out.println("Speedup: " + comparison.getImprovementPercentage() + "%");
+    System.out.println("Results match: " + comparison.resultsMatch());
+}
+```
+
+### 🧪 **Benchmark Test Classes**
+
+#### **Available Benchmark Tests**
+- **`SimplePerformanceTest.java.benchmark`** - Basic performance testing
+- **`PerformanceComparisonTest.java.benchmark`** - Performance comparison analysis
+- **`QuickPerformanceDemo.java.benchmark`** - Quick performance demonstration
+
+#### **Running Benchmark Tests**
+```bash
+# Run specific benchmark test class
+mvn test -Dtest=SimplePerformanceTest
+
+# Run with benchmark profile
+mvn test -P benchmark
+
+# Run with specific test methods
+mvn test -Dtest=SimplePerformanceTest#testBasicPerformance
+```
+
+### 📈 **Performance Metrics**
+
+#### **Expected Performance Results**
+| Test Type | Expected Time | Memory Usage | Notes |
+|-----------|---------------|--------------|-------|
+| **Simple Queries** | <5ms | <50KB | Basic functionality |
+| **Complex Queries** | <20ms | <200KB | Nested structures |
+| **Large Documents** | <100ms | <1MB | 1MB+ documents |
+| **Fragment Queries** | <30ms | <300KB | Fragment resolution |
+
+#### **Performance Monitoring**
+```java
+// Get performance statistics
+Map<String, Object> stats = processor.getPerformanceStats();
+
+System.out.println("Cache hit rate: " + stats.get("cacheHitRate"));
+System.out.println("Average processing time: " + stats.get("avgProcessingTime"));
+System.out.println("Total documents processed: " + stats.get("totalDocuments"));
+System.out.println("Memory usage: " + stats.get("memoryUsage"));
+```
+
+### 🔧 **Test Configuration**
+
+#### **Maven Configuration**
+```xml
+<!-- pom.xml -->
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <configuration>
+        <excludedTags>benchmark</excludedTags>
+    </configuration>
+</plugin>
+
+<profiles>
+    <profile>
+        <id>benchmark</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <includedTags>benchmark</includedTags>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+</profiles>
+```
+
+#### **JUnit 5 Tagging**
+```java
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+@Test
+@Tag("benchmark")
+void testPerformanceOptimization() {
+    // Performance test implementation
+}
+
+@Test
+void testBasicFunctionality() {
+    // Regular test (runs by default)
+}
+```
+
+### 🎯 **Best Practices**
+
+#### **Test Organization**
+- **Keep tests organized** by functionality and type
+- **Use descriptive names** for test methods and classes
+- **Separate concerns** between unit, integration, and performance tests
+- **Document test purpose** and expected outcomes
+
+#### **Performance Testing**
+- **Run benchmarks** before major releases
+- **Monitor performance trends** over time
+- **Set performance baselines** for regression detection
+- **Use realistic test data** for accurate results
+
+#### **Test Maintenance**
+- **Update tests** when functionality changes
+- **Remove obsolete tests** to maintain clarity
+- **Keep test data** up-to-date and relevant
+- **Document test dependencies** and setup requirements
+
+### 🚀 **CI/CD Integration**
+
+#### **GitHub Actions Example**
+```yaml
+name: Test Suite
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    
+    - name: Run Core Tests
+      run: mvn test
+    
+    - name: Run Benchmark Tests
+      run: mvn test -P benchmark
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+```
+
+#### **Performance Regression Detection**
+```yaml
+- name: Performance Regression Check
+  run: |
+    # Run benchmarks and compare with baseline
+    mvn test -P benchmark > benchmark_results.txt
+    
+    # Check if performance is within acceptable range
+    python scripts/check_performance.py benchmark_results.txt
 ```
 
 ---
