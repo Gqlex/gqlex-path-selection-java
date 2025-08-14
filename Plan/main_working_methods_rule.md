@@ -13,3 +13,4 @@
 - benchmark test classes: SimplePerformanceTest, PerformanceComparisonTest, and benchmark methods in LazyXPathProcessorTest
 - benchmark tests use files from the benchmark/ directory for performance analysis
 - files that are served for tests should be under resources folder accordingly
+- you should always from iteratin to iteration to update trhe memory_state.md

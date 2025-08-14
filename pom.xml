@@ -43,8 +43,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <junit.version>5.7.2</junit.version>
-        <jacoco.enabled>true</jacoco.enabled>
-        <jacoco.version>0.8.8</jacoco.version>
+        <jacoco.enabled>false</jacoco.enabled>
+        <jacoco.version>0.8.11</jacoco.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
@@ -153,6 +153,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Temporarily disabled due to Java 21 compatibility issues
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -172,7 +173,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <enabled>${jacoco.enabled}</enabled>
+                </configuration>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -232,7 +237,7 @@
 
     <!-- Profiles for different test configurations -->
     <profiles>
-        <!-- Fast tests profile - runs only quick tests by default -->
+        <!-- Fast tests profile - runs quick tests by default -->
         <profile>
             <id>fast</id>
             <activation>
@@ -244,22 +249,11 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <includes>
-                                <include>**/LazyXPathProcessorTest.java</include>
-                            </includes>
                             <excludes>
                                 <exclude>**/*Performance*.java</exclude>
                                 <exclude>**/*Benchmark*.java</exclude>
-                                <exclude>**/GraphQLLinterTest.java</exclude>
-                                <exclude>**/SelectorFacadeTest.java</exclude>
-                                <exclude>**/SearchPathBuilderTest.java</exclude>
-                                <exclude>**/SearchPathElementTest.java</exclude>
-                                <exclude>**/SyntaxPathTest.java</exclude>
-                                <exclude>**/eXtendGqlBuilderTest.java</exclude>
-                                <exclude>**/QueryTemplateTest.java</exclude>
-                                <exclude>**/LintResultTest.java</exclude>
-                                <exclude>**/LintPresetTest.java</exclude>
-                                <exclude>**/StyleRuleTest.java</exclude>
+                                <exclude>**/*.java.benchmark</exclude>
+                                <exclude>**/*.java.disabled</exclude>
                             </excludes>
                         </configuration>
                     </plugin>
@@ -282,6 +276,7 @@
                             <includes>
                                 <include>**/*Performance*.java</include>
                                 <include>**/*Benchmark*.java</include>
+                                <include>**/*.java.benchmark</include>
                             </includes>
                             <systemPropertyVariables>
                                 <benchmark.mode>true</benchmark.mode>
