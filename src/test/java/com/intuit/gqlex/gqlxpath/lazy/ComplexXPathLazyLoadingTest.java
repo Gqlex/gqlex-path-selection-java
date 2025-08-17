@@ -31,9 +31,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * 7. Fragment and Directive Complex Patterns
  * 8. Performance-Intensive Operations
  */
-@Tag("complex-xpath")
-@Tag("lazy-loading")
-@Tag("deep-testing")
+    @Tag("complex-xpath")
+    @Tag("lazy-loading")
+    @Tag("deep-testing")
+    @Tag("benchmark")
 class ComplexXPathLazyLoadingTest {
 
     @TempDir
