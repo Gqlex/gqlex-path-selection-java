@@ -82,7 +82,7 @@ jobs:
         - **📋 [View Latest Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})**
         - **📥 [Download Full Coverage Reports](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})**
         - **📊 [View All Actions](https://github.com/${{ github.repository }}/actions)**
-        - **📋 [Coverage Status](docs/COVERAGE_STATUS.md)** - Quick overview page
+        - **�� [Coverage Status](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md)** - Quick overview page
         
         ## 📁 Available Artifacts
         
@@ -94,7 +94,7 @@ jobs:
         
         ## 🎨 Coverage Badge
         
-        [![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)](docs/COVERAGE_STATUS.md)
+        [![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md)
         
         > **💡 Click the badge above to go to the coverage status page!**
         
@@ -110,8 +110,8 @@ jobs:
         
         ## 📋 Navigation
         
-        - **🏠 [Coverage Status](docs/COVERAGE_STATUS.md)** - Main coverage page
-        - **📊 [Coverage Summary](docs/COVERAGE_SUMMARY.md)** - Quick overview
+        - **🏠 [Coverage Status](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md)** - Main coverage page
+        - **📊 [Coverage Summary](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_SUMMARY.md)** - Quick overview
         - **🚀 [Latest Build](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})** - Download artifacts
         
         ---
@@ -151,6 +151,11 @@ jobs:
         Coverage reports are generated on every build and stored as artifacts.
         View the Actions tab for historical coverage data.
         
+        ## 🔗 Related Files
+        
+        - **📊 [Full Coverage Report](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_REPORT.md)**
+        - **📋 [Coverage Status](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md)**
+        
         ---
         *Generated automatically by GitHub Actions*
         EOF
@@ -179,14 +184,14 @@ jobs:
         
         ## 📁 Available Reports
         
-        - **📊 [Full Coverage Report](docs/COVERAGE_REPORT.md)** - Comprehensive coverage analysis
-        - **📋 [Coverage Summary](docs/COVERAGE_SUMMARY.md)** - Quick overview
+        - **📊 [Full Coverage Report](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_REPORT.md)** - Comprehensive coverage analysis
+        - **📋 [Coverage Summary](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_SUMMARY.md)** - Quick overview
         - **🔗 [GitHub Actions](https://github.com/${{ github.repository }}/actions)** - Download detailed reports
         - **📥 [Latest Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})** - Current build artifacts
         
         ## 🎯 Quick Actions
         
-        - **View Coverage Report**: [📊 COVERAGE_REPORT.md](docs/COVERAGE_REPORT.md)
+        - **View Coverage Report**: [📊 COVERAGE_REPORT.md](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_REPORT.md)
         - **Download Artifacts**: [🚀 Latest Build](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
         - **View All Actions**: [📋 Actions History](https://github.com/${{ github.repository }}/actions)
         
