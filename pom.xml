@@ -278,6 +278,7 @@
                                 <exclude>**/*.java.benchmark</exclude>
                                 <exclude>**/*.java.disabled</exclude>
                             </excludes>
+                            <excludedGroups>benchmark</excludedGroups>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -301,6 +302,7 @@
                                 <include>**/*Benchmark*.java</include>
                                 <include>**/*.java.benchmark</include>
                             </includes>
+                            <includedGroups>benchmark</includedGroups>
                             <systemPropertyVariables>
                                 <benchmark.mode>true</benchmark.mode>
                             </systemPropertyVariables>
