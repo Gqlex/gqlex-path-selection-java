@@ -106,3 +106,37 @@ jobs:
           } catch (error) {
             console.log('Could not generate coverage comment:', error.message);
           }
+    
+    - name: Generate coverage badge
+      run: |
+        # Extract coverage percentage from JaCoCo report
+        if [ -f "coverage/target/site/jacoco/index.html" ]; then
+          COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' coverage/target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          if [ -n "$COVERAGE" ]; then
+            # Create badge using shields.io
+            BADGE_URL="https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java"
+            echo "Coverage: $COVERAGE"
+            echo "Badge URL: $BADGE_URL"
+            
+            # Update README with coverage badge
+            if [ -f "README.md" ]; then
+              # Remove existing coverage badge if present
+              sed -i.bak '/!\[coverage\]/d' README.md
+              sed -i.bak '/\[coverage\]:/d' README.md
+              
+              # Add new coverage badge at the top
+              sed -i.bak "1i\\
+              ![coverage]($BADGE_URL)\\
+              \\
+              [coverage]: $BADGE_URL\\
+              " README.md
+              
+              # Commit and push changes
+              git config --local user.email "action@github.com"
+              git config --local user.name "GitHub Action"
+              git add README.md
+              git commit -m "Update coverage badge: $COVERAGE" || echo "No changes to commit"
+              git push || echo "Could not push changes"
+            fi
+          fi
+        fi
