@@ -20,5 +20,10 @@
 Coverage reports are generated on every build and stored as artifacts.
 View the Actions tab for historical coverage data.
 
+## 🔗 Related Files
+
+- **📊 [Full Coverage Report](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_REPORT.md)**
+- **📋 [Coverage Status](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)**
+
 ---
 *Generated automatically by GitHub Actions*
