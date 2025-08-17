@@ -1,0 +1,22 @@
+query HeroQuery($episode: Episode) {
+  hero(episode: $episode) {
+    id
+    name
+    friends {
+      id
+      name
+      appearsIn
+    }
+    enemies {
+      id
+      name
+      appearsIn
+    }
+  }
+}
+
+fragment HeroFields on Character {
+  id
+  name
+  appearsIn
+}

@@ -72,13 +72,51 @@ public class GqlNodeContext/* implements Cloneable*/{
 
     @Override
     public String toString() {
-        return "GqlNodeContext{" +
-                "parentNode=" + parentNode +
-                ", node=" + node +
-                ", level=" + level +
-                ", nodeStack=" + nodeStack +
-                ", searchContext=" + searchContext +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("GqlNodeContext{");
+        
+        // Node information
+        if (node != null) {
+            sb.append("type=").append(node.getType());
+            if (node.getNode() != null) {
+                String nodeClassName = node.getNode().getClass().getSimpleName();
+                sb.append(", nodeClass=").append(nodeClassName);
+                
+                // Add specific node information based on type
+                if (node.getNode() instanceof graphql.language.Field) {
+                    graphql.language.Field field = (graphql.language.Field) node.getNode();
+                    sb.append(", fieldName=").append(field.getName());
+                } else if (node.getNode() instanceof graphql.language.Argument) {
+                    graphql.language.Argument arg = (graphql.language.Argument) node.getNode();
+                    sb.append(", argName=").append(arg.getName());
+                } else if (node.getNode() instanceof graphql.language.Directive) {
+                    graphql.language.Directive dir = (graphql.language.Directive) node.getNode();
+                    sb.append(", directiveName=").append(dir.getName());
+                }
+            }
+        }
+        
+        // Level and context information
+        sb.append(", level=").append(level);
+        
+        // Parent node information
+        if (parentNode != null) {
+            String parentClassName = parentNode.getClass().getSimpleName();
+            sb.append(", parentClass=").append(parentClassName);
+        }
+        
+        // Node stack information
+        if (nodeStack != null) {
+            sb.append(", stackSize=").append(nodeStack.size());
+        }
+        
+        // Search context information
+        if (searchContext != null) {
+            sb.append(", searchContext=").append(searchContext.toString());
+        }
+        
+        sb.append("}");
+        return sb.toString();
     }
 
     public String toShortString() {
