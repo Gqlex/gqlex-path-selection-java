@@ -36,6 +36,36 @@ jobs:
     - name: Build and Test with Coverage
       run: mvn -B clean test jacoco:report --file pom.xml
     
+    - name: Debug JaCoCo Report
+      run: |
+        echo "=== JaCoCo Report Debug ==="
+        if [ -f "target/site/jacoco/index.html" ]; then
+          echo "✅ JaCoCo report exists at target/site/jacoco/index.html"
+          echo "📏 File size: $(ls -lh target/site/jacoco/index.html | awk '{print $5}')"
+          echo "📅 Last modified: $(ls -la target/site/jacoco/index.html | awk '{print $6, $7, $8}')"
+          echo ""
+          echo "=== First 20 lines of JaCoCo report ==="
+          head -20 target/site/jacoco/index.html
+          echo ""
+          echo "=== Looking for coverage patterns ==="
+          echo "Pattern 1 (Total coverage):"
+          grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html || echo "No match found"
+          echo ""
+          echo "Pattern 2 (Any percentage):"
+          grep -o '[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | head -5 || echo "No match found"
+          echo ""
+          echo "Pattern 3 (Coverage text):"
+          grep -i 'coverage' target/site/jacoco/index.html | head -3 || echo "No match found"
+        else
+          echo "❌ JaCoCo report NOT found at target/site/jacoco/index.html"
+          echo "📁 Contents of target/site/jacoco/:"
+          ls -la target/site/jacoco/ 2>/dev/null || echo "Directory does not exist"
+          echo ""
+          echo "📁 Contents of target/site/:"
+          ls -la target/site/ 2>/dev/null || echo "Directory does not exist"
+        fi
+        echo "=== End Debug ==="
+    
     - name: Build Package
       run: mvn -B package --file pom.xml
     
@@ -167,7 +197,31 @@ jobs:
       run: |
         # Create a coverage status badge that links to GitHub Actions
         if [ -f "target/site/jacoco/index.html" ]; then
+          echo "JaCoCo report found, extracting coverage..."
+          
+          # Try multiple patterns to extract coverage percentage
+          COVERAGE=""
+          
+          # Pattern 1: Look for Total coverage in the HTML
           COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          
+          # Pattern 2: Look for coverage in the title or headers
+          if [ -z "$COVERAGE" ]; then
+            COVERAGE=$(grep -o 'coverage.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          fi
+          
+          # Pattern 3: Look for any percentage in the HTML
+          if [ -z "$COVERAGE" ]; then
+            COVERAGE=$(grep -o '[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | head -1)
+          fi
+          
+          # If still no coverage found, use a default value
+          if [ -z "$COVERAGE" ]; then
+            COVERAGE="N/A"
+            echo "Warning: Could not extract coverage percentage, using N/A"
+          else
+            echo "Coverage extracted: $COVERAGE"
+          fi
           
           # Create a status badge that links to the workflow run
           WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
@@ -209,6 +263,24 @@ jobs:
         EOF
         
           echo "Coverage status created: docs/COVERAGE_STATUS.md"
+        else
+          echo "Warning: JaCoCo report not found at target/site/jacoco/index.html"
+          # Create a fallback coverage status file
+          cat > docs/COVERAGE_STATUS.md << EOF
+        # 📊 Coverage Status
+        
+        **Current Coverage: N/A (Report not found)**
+        
+        > **Coverage report could not be generated. Check the workflow logs for details.**
+        
+        ## 📁 Available Reports
+        
+        - **🔗 [GitHub Actions](https://github.com/${{ github.repository }}/actions)** - View workflow logs
+        - **📥 [Latest Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})** - Current build
+        
+        ---
+        *⚠️ Coverage report generation failed*
+        EOF
         fi
     
     - name: Commit coverage reports to repository
