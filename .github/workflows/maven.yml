@@ -64,33 +64,33 @@ jobs:
           COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
           
           # Create a markdown summary
-          cat > COVERAGE_SUMMARY.md << EOF
-          # 📊 Code Coverage Summary
-          
-          **Current Coverage: ${COVERAGE}**
-          
-          ## 📁 Coverage Reports
-          
-          - **HTML Report**: Available as artifact in GitHub Actions
-          - **XML Report**: Available as artifact in GitHub Actions
-          - **Last Updated**: $(date -u +"%Y-%m-%d %H:%M UTC")
-          
-          ## 🔍 How to View Coverage
-          
-          1. Go to [GitHub Actions](https://github.com/${{ github.repository }}/actions)
-          2. Click on the latest workflow run
-          3. Download the \`coverage-reports\` artifact
-          4. Open \`target/site/jacoco/index.html\` in your browser
-          
-          ## 📈 Coverage History
-          
-          Coverage reports are generated on every build and stored as artifacts.
-          View the Actions tab for historical coverage data.
-          
-          ---
-          *Generated automatically by GitHub Actions*
-          EOF
-          
+          cat > COVERAGE_SUMMARY.md << 'EOF'
+        # 📊 Code Coverage Summary
+        
+        **Current Coverage: ${COVERAGE}**
+        
+        ## 📁 Coverage Reports
+        
+        - **HTML Report**: Available as artifact in GitHub Actions
+        - **XML Report**: Available as artifact in GitHub Actions
+        - **Last Updated**: $(date -u +"%Y-%m-%d %H:%M UTC")
+        
+        ## 🔍 How to View Coverage
+        
+        1. Go to [GitHub Actions](https://github.com/${{ github.repository }}/actions)
+        2. Click on the latest workflow run
+        3. Download the `coverage-reports` artifact
+        4. Open `target/site/jacoco/index.html` in your browser
+        
+        ## 📈 Coverage History
+        
+        Coverage reports are generated on every build and stored as artifacts.
+        View the Actions tab for historical coverage data.
+        
+        ---
+        *Generated automatically by GitHub Actions*
+        EOF
+        
           echo "Coverage summary created: COVERAGE_SUMMARY.md"
         fi
     
@@ -111,25 +111,25 @@ jobs:
           WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           
           # Create a simple status file that can be used for badges
-          cat > COVERAGE_STATUS.md << EOF
-          # 📊 Coverage Status
-          
-          **Current Coverage: ${COVERAGE}**
-          
-          [![Coverage Status](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)]($WORKFLOW_URL)
-          
-          > **Click the badge above to view detailed coverage reports in GitHub Actions**
-          
-          ## 📁 Available Reports
-          
-          - **HTML Coverage Report**: Download from Actions artifacts
-          - **Coverage Summary**: This file
-          - **Last Build**: [Workflow Run #${{ github.run_number }}]($WORKFLOW_URL)
-          
-          ---
-          *Updated automatically by GitHub Actions*
-          EOF
-          
+          cat > COVERAGE_STATUS.md << 'EOF'
+        # 📊 Coverage Status
+        
+        **Current Coverage: ${COVERAGE}**
+        
+        [![Coverage Status](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)]($WORKFLOW_URL)
+        
+        > **Click the badge above to view detailed coverage reports in GitHub Actions**
+        
+        ## 📁 Available Reports
+        
+        - **HTML Coverage Report**: Download from Actions artifacts
+        - **Coverage Summary**: This file
+        - **Last Build**: [Workflow Run #${{ github.run_number }}]($WORKFLOW_URL)
+        
+        ---
+        *Updated automatically by GitHub Actions*
+        EOF
+        
           echo "Coverage status created: COVERAGE_STATUS.md"
         fi
     
