@@ -4,7 +4,7 @@
 [![Java](https://img.shields.io/badge/Java-11+-blue.svg)](https://openjdk.java.net/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-389%20passed-brightgreen.svg)](https://github.com/Gqlex/gqlex-path-selection-java/actions)
-[![Coverage](https://img.shields.io/badge/Coverage-98.4%25-brightgreen.svg)](https://github.com/Gqlex/gqlex-path-selection-java)
+[![Coverage](https://img.shields.io/badge/Coverage-98.4%25-brightgreen.svg)](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)
 [![Security](https://img.shields.io/badge/Security-Enterprise%20Grade-brightgreen.svg)](https://github.com/Gqlex/gqlex-path-selection-java)
 [![Performance](https://img.shields.io/badge/Performance-8000x%20faster-brightgreen.svg)](https://github.com/Gqlex/gqlex-path-selection-java)
 
