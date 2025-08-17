@@ -57,14 +57,78 @@ jobs:
           target/site/jacoco/jacoco.xml
         retention-days: 30
     
+    - name: Create GitHub coverage report
+      run: |
+        # Create a GitHub-friendly coverage report
+        if [ -f "target/site/jacoco/index.html" ]; then
+          COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          
+          # Create a comprehensive coverage report for GitHub
+          cat > docs/COVERAGE_REPORT.md << 'EOF'
+        # 🎯 Code Coverage Report
+        
+        ## 📊 Current Status
+        
+        | Metric | Value |
+        |--------|-------|
+        | **Overall Coverage** | **${COVERAGE}** |
+        | **Last Build** | [Run #${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+        | **Branch** | `${{ github.ref_name }}` |
+        | **Commit** | [`${{ github.sha }}`](https://github.com/${{ github.repository }}/commit/${{ github.sha }}) |
+        | **Last Updated** | $(date -u +"%Y-%m-%d %H:%M UTC") |
+        
+        ## 🔗 Quick Access
+        
+        - **📋 [View Latest Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})**
+        - **📥 [Download Full Coverage Reports](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})**
+        - **📊 [View All Actions](https://github.com/${{ github.repository }}/actions)**
+        - **📋 [Coverage Status](docs/COVERAGE_STATUS.md)** - Quick overview page
+        
+        ## 📁 Available Artifacts
+        
+        | Artifact | Description | Size |
+        |----------|-------------|------|
+        | `coverage-reports` | Full JaCoCo HTML & XML reports | ~2-5 MB |
+        | `coverage-summary` | Basic summary file | ~1 KB |
+        | `coverage-status` | Status with clickable badge | ~1 KB |
+        
+        ## 🎨 Coverage Badge
+        
+        [![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)](docs/COVERAGE_STATUS.md)
+        
+        > **💡 Click the badge above to go to the coverage status page!**
+        
+        ## 📈 Coverage Trends
+        
+        Coverage is tracked across all builds. View historical data in the Actions tab.
+        
+        ## 🔍 How to View Detailed Coverage
+        
+        1. **Click the coverage badge** above to go to the coverage status page
+        2. **Download the `coverage-reports` artifact** from the Actions page
+        3. **Extract and open** `target/site/jacoco/index.html` in your browser
+        
+        ## 📋 Navigation
+        
+        - **🏠 [Coverage Status](docs/COVERAGE_STATUS.md)** - Main coverage page
+        - **📊 [Coverage Summary](docs/COVERAGE_SUMMARY.md)** - Quick overview
+        - **🚀 [Latest Build](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})** - Download artifacts
+        
+        ---
+        *🔄 Updated automatically on every build*
+        EOF
+        
+          echo "GitHub coverage report created: docs/COVERAGE_REPORT.md"
+        fi
+    
     - name: Create coverage summary
       run: |
         # Create a coverage summary file that can be viewed in GitHub
         if [ -f "target/site/jacoco/index.html" ]; then
           COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
           
-          # Create a markdown summary
-          cat > COVERAGE_SUMMARY.md << 'EOF'
+          # Create a markdown summary that works well in GitHub
+          cat > docs/COVERAGE_SUMMARY.md << 'EOF'
         # 📊 Code Coverage Summary
         
         **Current Coverage: ${COVERAGE}**
@@ -91,15 +155,8 @@ jobs:
         *Generated automatically by GitHub Actions*
         EOF
         
-          echo "Coverage summary created: COVERAGE_SUMMARY.md"
+          echo "Coverage summary created: docs/COVERAGE_SUMMARY.md"
         fi
-    
-    - name: Upload coverage summary
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-summary
-        path: COVERAGE_SUMMARY.md
-        retention-days: 30
     
     - name: Create coverage status badge
       run: |
@@ -111,34 +168,55 @@ jobs:
           WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           
           # Create a simple status file that can be used for badges
-          cat > COVERAGE_STATUS.md << 'EOF'
+          cat > docs/COVERAGE_STATUS.md << 'EOF'
         # 📊 Coverage Status
         
         **Current Coverage: ${COVERAGE}**
         
-        [![Coverage Status](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)]($WORKFLOW_URL)
+        [![Coverage Status](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
         
         > **Click the badge above to view detailed coverage reports in GitHub Actions**
         
         ## 📁 Available Reports
         
-        - **HTML Coverage Report**: Download from Actions artifacts
-        - **Coverage Summary**: This file
-        - **Last Build**: [Workflow Run #${{ github.run_number }}]($WORKFLOW_URL)
+        - **📊 [Full Coverage Report](docs/COVERAGE_REPORT.md)** - Comprehensive coverage analysis
+        - **📋 [Coverage Summary](docs/COVERAGE_SUMMARY.md)** - Quick overview
+        - **🔗 [GitHub Actions](https://github.com/${{ github.repository }}/actions)** - Download detailed reports
+        - **📥 [Latest Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})** - Current build artifacts
+        
+        ## 🎯 Quick Actions
+        
+        - **View Coverage Report**: [📊 COVERAGE_REPORT.md](docs/COVERAGE_REPORT.md)
+        - **Download Artifacts**: [🚀 Latest Build](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+        - **View All Actions**: [📋 Actions History](https://github.com/${{ github.repository }}/actions)
+        
+        ## 📈 Coverage Details
+        
+        | Metric | Value |
+        |--------|-------|
+        | **Current Coverage** | **${COVERAGE}** |
+        | **Last Build** | [Run #${{ github.run_number }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+        | **Branch** | `${{ github.ref_name }}` |
+        | **Last Updated** | $(date -u +"%Y-%m-%d %H:%M UTC") |
         
         ---
-        *Updated automatically by GitHub Actions*
+        *🔄 Updated automatically on every build*
         EOF
         
-          echo "Coverage status created: COVERAGE_STATUS.md"
+          echo "Coverage status created: docs/COVERAGE_STATUS.md"
         fi
     
-    - name: Upload coverage status
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-status
-        path: COVERAGE_STATUS.md
-        retention-days: 30
+    - name: Commit coverage reports to repository
+      run: |
+        # Create docs directory if it doesn't exist
+        mkdir -p docs
+        
+        # Add and commit coverage reports to the repository
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/COVERAGE_REPORT.md docs/COVERAGE_SUMMARY.md docs/COVERAGE_STATUS.md
+        git commit -m "Update coverage reports: ${COVERAGE}% coverage" || echo "No changes to commit"
+        git push || echo "Could not push changes"
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
@@ -201,9 +279,9 @@ jobs:
             echo "Coverage: $COVERAGE"
             echo "Badge URL: $BADGE_URL"
             
-            # Create clickable link to GitHub Actions coverage
-            WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            COVERAGE_LINK="[![coverage]($BADGE_URL)]($WORKFLOW_URL)"
+            # Create clickable link to the coverage status file in docs
+            COVERAGE_STATUS_URL="https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md"
+            COVERAGE_LINK="[![coverage]($BADGE_URL)]($COVERAGE_STATUS_URL)"
             
             # Update README with clickable coverage badge
             if [ -f "README.md" ]; then
@@ -216,14 +294,14 @@ jobs:
               sed -i.bak "1i\\
               $COVERAGE_LINK\\
               \\
-              > 📊 **Click the badge above to view detailed coverage reports in GitHub Actions**\\
+              > 📊 **Click the badge above to view the coverage status page**\\
               " README.md
               
               # Commit and push changes
               git config --local user.email "action@github.com"
               git config --local user.name "GitHub Action"
               git add README.md
-              git commit -m "Update clickable coverage badge: $COVERAGE" || echo "No changes to commit"
+              git commit -m "Update coverage badge to link to coverage status: $COVERAGE" || echo "No changes to commit"
               git push || echo "Could not push changes"
             fi
           fi
