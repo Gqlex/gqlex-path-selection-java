@@ -1,12 +1,12 @@
 # 📊 Code Coverage Summary
 
-**Current Coverage: ${COVERAGE}**
+**Current Coverage: **
 
 ## 📁 Coverage Reports
 
 - **HTML Report**: Available as artifact in GitHub Actions
 - **XML Report**: Available as artifact in GitHub Actions
-- **Last Updated**: $(date -u +"%Y-%m-%d %H:%M UTC")
+- **Last Updated**: 2025-08-17 14:39 UTC
 
 ## 🔍 How to View Coverage
 

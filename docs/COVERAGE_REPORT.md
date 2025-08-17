@@ -4,30 +4,30 @@
 
 | Metric | Value |
 |--------|-------|
-| **Overall Coverage** | **${COVERAGE}** |
-| **Last Build** | [Run #46](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022143958) |
-| **Branch** | `main` |
-| **Commit** | [`da78f4e9e9eb61de23fc712ad26936fdf8a781ba`](https://github.com/Gqlex/gqlex-path-selection-java/commit/da78f4e9e9eb61de23fc712ad26936fdf8a781ba) |
-| **Last Updated** | $(date -u +"%Y-%m-%d %H:%M UTC") |
+| **Overall Coverage** | **** |
+| **Last Build** | [Run #47](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022266959) |
+| **Branch** |  |
+| **Commit** | [](https://github.com/Gqlex/gqlex-path-selection-java/commit/edab67e51858b1939d0389ae6ed7f4395aad20fb) |
+| **Last Updated** | 2025-08-17 14:39 UTC |
 
 ## 🔗 Quick Access
 
-- **📋 [View Latest Workflow Run](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022143958)**
-- **📥 [Download Full Coverage Reports](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022143958)**
+- **📋 [View Latest Workflow Run](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022266959)**
+- **📥 [Download Full Coverage Reports](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022266959)**
 - **📊 [View All Actions](https://github.com/Gqlex/gqlex-path-selection-java/actions)**
-- **�� [Coverage Status](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)** - Quick overview page
+- **📋 [Coverage Status](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)** - Quick overview page
 
 ## 📁 Available Artifacts
 
 | Artifact | Description | Size |
 |----------|-------------|------|
-| `coverage-reports` | Full JaCoCo HTML & XML reports | ~2-5 MB |
-| `coverage-summary` | Basic summary file | ~1 KB |
-| `coverage-status` | Status with clickable badge | ~1 KB |
+|  | Full JaCoCo HTML & XML reports | ~2-5 MB |
+|  | Basic summary file | ~1 KB |
+|  | Status with clickable badge | ~1 KB |
 
 ## 🎨 Coverage Badge
 
-[![Coverage](https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java)](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)
+[![Coverage](https://img.shields.io/badge/coverage--brightgreen?style=flat&logo=java)](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)
 
 > **💡 Click the badge above to go to the coverage status page!**
 
@@ -45,7 +45,7 @@ Coverage is tracked across all builds. View historical data in the Actions tab.
 
 - **🏠 [Coverage Status](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)** - Main coverage page
 - **📊 [Coverage Summary](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_SUMMARY.md)** - Quick overview
-- **🚀 [Latest Build](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022143958)** - Download artifacts
+- **🚀 [Latest Build](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17022266959)** - Download artifacts
 
 ---
 *🔄 Updated automatically on every build*
