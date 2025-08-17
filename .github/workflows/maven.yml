@@ -91,7 +91,7 @@ jobs:
       run: |
         # Create a GitHub-friendly coverage report
         if [ -f "target/site/jacoco/index.html" ]; then
-          COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          COVERAGE=$(grep -o 'Total.*[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+%' | head -1)
           
           # Create a comprehensive coverage report for GitHub
           cat > docs/COVERAGE_REPORT.md << EOF
@@ -155,7 +155,7 @@ jobs:
       run: |
         # Create a coverage summary file that can be viewed in GitHub
         if [ -f "target/site/jacoco/index.html" ]; then
-          COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          COVERAGE=$(grep -o 'Total.*[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+%' | head -1)
           
           # Create a markdown summary that works well in GitHub
           cat > docs/COVERAGE_SUMMARY.md << EOF
@@ -202,17 +202,17 @@ jobs:
           # Try multiple patterns to extract coverage percentage
           COVERAGE=""
           
-          # Pattern 1: Look for Total coverage in the HTML
-          COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+          # Pattern 1: Look for Total coverage in the HTML footer (most reliable)
+          COVERAGE=$(grep -o 'Total.*[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+%' | head -1)
           
-          # Pattern 2: Look for coverage in the title or headers
+          # Pattern 2: Look for any percentage in the HTML
           if [ -z "$COVERAGE" ]; then
-            COVERAGE=$(grep -o 'coverage.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
+            COVERAGE=$(grep -o '[0-9]\+%' target/site/jacoco/index.html | head -1)
           fi
           
-          # Pattern 3: Look for any percentage in the HTML
+          # Pattern 3: Look for coverage in the title or headers
           if [ -z "$COVERAGE" ]; then
-            COVERAGE=$(grep -o '[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | head -1)
+            COVERAGE=$(grep -i 'coverage.*[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+%' | head -1)
           fi
           
           # If still no coverage found, use a default value
