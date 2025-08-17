@@ -64,7 +64,7 @@ jobs:
           COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
           
           # Create a comprehensive coverage report for GitHub
-          cat > docs/COVERAGE_REPORT.md << 'EOF'
+          cat > docs/COVERAGE_REPORT.md << EOF
         # 🎯 Code Coverage Report
         
         ## 📊 Current Status
@@ -82,7 +82,7 @@ jobs:
         - **📋 [View Latest Workflow Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})**
         - **📥 [Download Full Coverage Reports](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})**
         - **📊 [View All Actions](https://github.com/${{ github.repository }}/actions)**
-        - **�� [Coverage Status](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md)** - Quick overview page
+        - **📋 [Coverage Status](https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md)** - Quick overview page
         
         ## 📁 Available Artifacts
         
@@ -105,8 +105,8 @@ jobs:
         ## 🔍 How to View Detailed Coverage
         
         1. **Click the coverage badge** above to go to the coverage status page
-        2. **Download the `coverage-reports` artifact** from the Actions page
-        3. **Extract and open** `target/site/jacoco/index.html` in your browser
+        2. **Download the \`coverage-reports\` artifact** from the Actions page
+        3. **Extract and open** \`target/site/jacoco/index.html\` in your browser
         
         ## 📋 Navigation
         
@@ -128,7 +128,7 @@ jobs:
           COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
           
           # Create a markdown summary that works well in GitHub
-          cat > docs/COVERAGE_SUMMARY.md << 'EOF'
+          cat > docs/COVERAGE_SUMMARY.md << EOF
         # 📊 Code Coverage Summary
         
         **Current Coverage: ${COVERAGE}**
@@ -143,8 +143,8 @@ jobs:
         
         1. Go to [GitHub Actions](https://github.com/${{ github.repository }}/actions)
         2. Click on the latest workflow run
-        3. Download the `coverage-reports` artifact
-        4. Open `target/site/jacoco/index.html` in your browser
+        3. Download the \`coverage-reports\` artifact
+        4. Open \`target/site/jacoco/index.html\` in your browser
         
         ## 📈 Coverage History
         
@@ -173,7 +173,7 @@ jobs:
           WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           
           # Create a simple status file that can be used for badges
-          cat > docs/COVERAGE_STATUS.md << 'EOF'
+          cat > docs/COVERAGE_STATUS.md << EOF
         # 📊 Coverage Status
         
         **Current Coverage: ${COVERAGE}**
