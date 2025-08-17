@@ -10,21 +10,21 @@
 
 ## 📋 Table of Contents
 
-- [🚀 Overview](#-overview)
-- [⚡ Quick Start](#-quick-start)
-- [🎯 Core Features](#-core-features)
-- [🏗️ Architecture](#️-architecture)
-- [📚 Documentation](#-documentation)
+- [Overview](#-overview)
+- [Quick Start](#-quick-start)
+- [Core Features](#-core-features)
+- [Architecture](#️-architecture)
+- [Documentation](#-documentation)
 - [🚀 Use Cases](#-use-cases)
-- [⚡ Performance](#-performance)
-- [🔧 Advanced Features](#-advanced-features)
-- [🎯 Quick Examples](#-quick-examples)
-- [🔗 Integration](#-integration)
-- [📊 Benchmarks](#-benchmarks)
+- [Performance](#-performance)
+- [Advanced Features](#-advanced-features)
+- [Quick Examples](#-quick-examples)
+- [Integration](#-integration)
+- [Benchmarks](#-benchmarks)
 - [🛡️ Security](#️-security)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [🆘 Support](#-support)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Support](#-support)
 
 ## 🚀 Overview
 
@@ -83,26 +83,26 @@ SecurityValidationResult securityResult = new SecurityValidator()
 |---------|-------------|---------------|
 | **🔍 gqlXPath Navigation** | XPath-style path selection for GraphQL | [📖 gqlXPath Guide](src/main/java/com/intuit/gqlex/gqlxpath/readme.md) |
 | **🚀 Lazy Loading gqlXPath** | Revolutionary lazy loading with **8,000x+ speedup** | [📖 Lazy Loading Guide](#-lazy-loading-gqlxpath) |
-| **🔧 Query Transformation** | Programmatic query modification | [📖 Transformation Guide](src/main/java/com/intuit/gqlex/transformation/README.md) |
-| **✅ Validation & Linting** | Comprehensive GraphQL validation | [📖 Validation Guide](docs/GRAPHQL_VALIDATION_LINTING.md) |
-| **🛡️ Security Features** | Enterprise-grade security validation | [📖 Security Guide](src/main/java/com/intuit/gqlex/security/README.md) |
-| **⚡ Performance Optimization** | AST caching and optimization | [📖 Performance Guide](src/main/java/com/intuit/gqlex/transformation/optimization) |
-| **🎨 Query Templating** | Dynamic query generation | [📖 Templating Guide](src/main/java/com/intuit/gqlex/querytemplating/README.md) |
-| **🧩 Fragment Operations** | Advanced fragment manipulation | [📖 Fragment Guide](src/main/java/com/intuit/gqlex/transformation/operations) |
-| **🧪 Testing & Benchmark** | Comprehensive test system with 100% pass rate | [📖 Testing Guide](#-testing--benchmark-system) |
+| **Query Transformation** | Programmatic query modification | [📖 Transformation Guide](src/main/java/com/intuit/gqlex/transformation/README.md) |
+| **Validation & Linting** | Comprehensive GraphQL validation | [📖 Validation Guide](docs/GRAPHQL_VALIDATION_LINTING.md) |
+| **Security Features** | Enterprise-grade security validation | [📖 Security Guide](src/main/java/com/intuit/gqlex/security/README.md) |
+| **Performance Optimization** | AST caching and optimization | [📖 Performance Guide](src/main/java/com/intuit/gqlex/transformation/optimization) |
+| **Query Templating** | Dynamic query generation | [📖 Templating Guide](src/main/java/com/intuit/gqlex/querytemplating/README.md) |
+| **Fragment Operations** | Advanced fragment manipulation | [📖 Fragment Guide](src/main/java/com/intuit/gqlex/transformation/operations) |
+| **Testing & Benchmark** | Comprehensive test system with 100% pass rate | [📖 Testing Guide](#-testing--benchmark-system) |
 
 ## 🏗️ Architecture
 
 ```
 gqlex/
-├── 🎯 gqlXPath Engine          # Path selection & navigation
-├── 🔧 Transformation Engine    # Query modification & manipulation  
-├── ✅ Validation System        # Security, performance, structural validation
-├── 🛡️ Security Engine         # Security validation, audit logging, rate limiting
-├── 🚀 Optimization Engine     # Performance & caching
-├── 🎨 Templating Engine       # Dynamic query generation
-├── 🧩 Fragment Engine         # Fragment operations & optimization
-└── 📊 Linting Engine          # Code quality & best practices
+├── gqlXPath Engine          # Path selection & navigation
+├── Transformation Engine    # Query modification & manipulation  
+├── Validation System        # Security, performance, structural validation
+├── Security Engine         # Security validation, audit logging, rate limiting
+├── Optimization Engine     # Performance & caching
+├── Templating Engine       # Dynamic query generation
+├── Fragment Engine         # Fragment operations & optimization
+└── Linting Engine          # Code quality & best practices
 ```
 
 ## 📚 Documentation
@@ -124,7 +124,7 @@ gqlex/
 
 ## 🚀 Use Cases
 
-### 🔍 **API Gateway & Proxy**
+### 🔍**API Gateway & Proxy**
 ```java
 // Validate and transform incoming queries
 SecurityValidator securityValidator = new SecurityValidator();
@@ -161,7 +161,7 @@ if (depth > 10 || fieldCount > 100) {
 }
 ```
 
-### 🔧 **CI/CD & Development Tools**
+### **CI/CD & Development Tools**
 ```java
 // Lint queries in CI pipeline
 GraphQLLinter linter = new GraphQLLinter()
@@ -199,7 +199,7 @@ The lazy loading gqlXPath system provides **8,000x+ performance improvement** an
 | **Deep Nested (5+ levels)** | **Hours** | **2-8ms** | **8,000x+** | **90-95%** |
 | **Complex Predicates** | **Hours** | **0-85ms** | **8,000x+** | **90-95%** |
 
-#### 🔧 **Usage Examples**
+#### **Usage Examples**
 
 ```java
 import com.intuit.gqlex.gqlxpath.lazy.LazyXPathProcessor;
@@ -224,7 +224,7 @@ System.out.println("Traditional Time: " + comparison.getTraditionalTime() + "ms"
 System.out.println("Lazy Time: " + comparison.getLazyTime() + "ms");
 ```
 
-#### 🏗️ **Architecture Components**
+#### **Architecture Components**
 
 ```java
 // XPath Analysis - Determines required sections (generic & agnostic)
@@ -275,7 +275,7 @@ LazyXPathResult result = lazyProcessor.processXPath("enterprise_document.graphql
 // Processes in milliseconds instead of hours!
 ```
 
-#### 📈 **Advanced Features**
+#### **Advanced Features**
 
 **Performance Monitoring**
 ```java
@@ -300,7 +300,7 @@ Map<String, Object> cacheStats = lazyProcessor.getPerformanceStats();
 
 ### 📊 **Performance Optimization**
 
-#### 🚀 **Optimization Features**
+#### **Optimization Features**
 - **AST Caching** - Reduces parsing overhead by 80%
 - **Regex Pattern Pooling** - Eliminates regex compilation costs
 - **Object Pooling** - Reduces garbage collection pressure
@@ -308,7 +308,7 @@ Map<String, Object> cacheStats = lazyProcessor.getPerformanceStats();
 - **Intelligent Caching** - Smart section caching
 - **Memory-Mapped Files** - Efficient large file handling
 
-#### 📊 **Performance Metrics**
+#### **Performance Metrics**
 ```java
 // Performance analysis
 PerformanceOptimizationManager perfManager = PerformanceOptimizationManager.getInstance();
@@ -317,65 +317,9 @@ int depth = perfManager.analyzeQueryDepth(query);
 int fieldCount = perfManager.analyzeFieldCount(query);
 ```
 
-## 🧪 Testing & Benchmark System
+## Advanced Features
 
-### ⚡ **Comprehensive Test Infrastructure**
-
-The gqlex library includes a robust testing and benchmark system that ensures **100% test pass rate** while maintaining fast development feedback.
-
-#### 🎯 **Test Organization**
-- **`graphql_samples/`** - Centralized test resource directory
-- **`original_tests/`** - Core test files for regular functionality
-- **`benchmark/`** - Performance and benchmark test files
-- **Clean project structure** with organized test resources
-
-#### 🚀 **Test Execution Modes**
-```bash
-# Default mode - fast development feedback (300 tests in ~10-15 seconds)
-mvn test
-
-# Benchmark mode - performance analysis only
-mvn test -P benchmark
-
-# All tests mode - complete test suite
-mvn test -P all
-```
-
-#### 🔧 **Test Control Scripts**
-```bash
-# Fast mode - essential tests only
-./simple_test_control.sh fast
-
-# All tests mode - complete test suite
-./simple_test_control.sh all
-
-# Benchmark mode - performance tests only
-./simple_test_control.sh benchmark
-```
-
-#### 📊 **Performance Metrics**
-- **300 tests passing 100%** successfully
-- **Default test execution**: 10-15 seconds (vs. 2-3 minutes before)
-- **Benchmark tests**: Controlled execution for performance analysis
-- **Development feedback**: Instant iteration and rapid development
-
-#### 🧪 **Benchmark Test Classes**
-- **`SimplePerformanceTest.java.benchmark`** - Basic performance testing
-- **`PerformanceComparisonTest.java.benchmark`** - Performance comparison analysis
-- **`QuickPerformanceDemo.java.benchmark`** - Quick performance demonstration
-- **All performance tests** properly tagged and controlled
-
-### 📚 **Test Documentation**
-- **`BENCHMARK_EXECUTION_GUIDE.md`** - Complete benchmark testing guide
-- **`TEST_CONTROL_README.md`** - Test control system documentation
-- **`TEST_SYSTEM_SUMMARY.md`** - Test system overview and architecture
-- **Comprehensive guides** for all test categories and usage
-
----
-
-## 🔧 Advanced Features
-
-### 🎨 **Query Templating**
+### **Query Templating**
 ```java
 // Dynamic query generation
 String template = """
@@ -396,7 +340,7 @@ Map<String, Object> variables = Map.of("episode", "JEDI", "includeFriends", true
 String generatedQuery = queryTemplate.process(variables);
 ```
 
-### 🧩 **Fragment Operations**
+### **Fragment Operations**
 ```java
 // Fragment manipulation
 GraphQLTransformer transformer = new GraphQLTransformer(query);
@@ -433,7 +377,7 @@ auditLogger.logQuery(new AuditLogEntry()
     .setTimestamp(System.currentTimeMillis()));
 ```
 
-## 🎯 Quick Examples
+## Quick Examples
 
 ### 🔍 **Path Selection**
 ```java
@@ -443,7 +387,7 @@ GqlNodeContext heroName = selectorFacade.select(query, "//query/hero/name");
 List<GqlNodeContext> friends = selectorFacade.selectAll(query, "//query/hero/friends");
 ```
 
-### 🔧 **Query Transformation**
+### **Query Transformation**
 ```java
 // Transform queries programmatically
 TransformationResult result = new GraphQLTransformer(query)
@@ -454,7 +398,7 @@ TransformationResult result = new GraphQLTransformer(query)
     .transform();
 ```
 
-### ✅ **Validation & Linting**
+### **Validation & Linting**
 ```java
 // Comprehensive validation
 ValidationResult validation = new GraphQLValidator()
@@ -498,7 +442,7 @@ LintResult lintResult = new GraphQLLinter()
 
 ## 🛡️ Security
 
-### 🔒 **Security Features**
+### **Security Features**
 - **Query Depth Limiting** - Prevents deep nested queries
 - **Field Count Limiting** - Prevents field explosion attacks
 - **Rate Limiting** - Multi-window rate limiting (minute, hour, day)
@@ -506,7 +450,7 @@ LintResult lintResult = new GraphQLLinter()
 - **Audit Logging** - Comprehensive query and security event logging
 - **Security Validation** - Detection of suspicious patterns and introspection abuse
 
-### 🛡️ **Security Validation**
+### **Security Validation**
 ```java
 SecurityConfig config = new SecurityConfig()
     .setMaxQueryDepth(10)
@@ -519,46 +463,44 @@ SecurityValidator validator = new SecurityValidator(config);
 SecurityValidationResult result = validator.validate(query);
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
-### 🚀 **Getting Started**
+### **Getting Started**
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Add tests
 5. Submit a pull request
 
-### 📋 **Development Setup**
+### **Development Setup**
 ```bash
 git clone https://github.com/Gqlex/gqlex-path-selection-java.git
 cd gqlex-path-selection-java
 mvn clean install
 ```
 
-## 📄 License
+## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## Support
 
-### 📚 **Documentation**
+### **Documentation**
 - **[Getting Started](GETTING_STARTED.md)** - Comprehensive getting started guide
 - **[API Documentation](docs/)** - Detailed API documentation
 - **[Examples](docs/)** - Code examples and use cases
 
-### 🐛 **Issues & Support**
+### **Issues & Support**
 - **GitHub Issues**: [Report bugs or request features](https://github.com/Gqlex/gqlex-path-selection-java/issues)
 - **Discussions**: [Community discussions](https://github.com/Gqlex/gqlex-path-selection-java/discussions)
 
-### 📧 **Contact**
-- **Email**: [support@gqlex.dev](mailto:support@gqlex.dev)
-- **Twitter**: [@gqlex_library](https://twitter.com/gqlex_library)
-
+### **Contact**
+- **Email**: [yaron_karni@intuit.com; yaron.karni@gmail.com)
 ---
 
-## 🎉 **Production Ready**
+## **Production Ready**
 
 **gqlex** is production-ready with:
 - ✅ **300 tests passing 100%** (98.4% coverage)
