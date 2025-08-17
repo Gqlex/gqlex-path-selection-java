@@ -230,33 +230,33 @@ jobs:
           COVERAGE=$(grep -o 'Total.*[0-9]\+\.[0-9]\+%' target/site/jacoco/index.html | grep -o '[0-9]\+\.[0-9]\+%' | head -1)
           if [ -n "$COVERAGE" ]; then
             # Create badge using shields.io
-            BADGE_URL="https://img.shields.io/badge/coverage-${COVERAGE}-brightgreen?style=flat&logo=java"
+            BADGE_URL="https://img.shields.io/badge/Coverage-${COVERAGE}-brightgreen.svg"
             echo "Coverage: $COVERAGE"
             echo "Badge URL: $BADGE_URL"
             
             # Create clickable link to the coverage status file in docs
             COVERAGE_STATUS_URL="https://github.com/${{ github.repository }}/blob/main/docs/COVERAGE_STATUS.md"
-            COVERAGE_LINK="[![coverage]($BADGE_URL)]($COVERAGE_STATUS_URL)"
+            COVERAGE_LINK="[![Coverage]($BADGE_URL)]($COVERAGE_STATUS_URL)"
             
             # Update README with clickable coverage badge
             if [ -f "README.md" ]; then
-              # Remove existing coverage badge if present
-              sed -i.bak '/!\[coverage\]/d' README.md
-              sed -i.bak '/\[coverage\]:/d' README.md
-              sed -i.bak '/\[!\[coverage\]/d' README.md
+              # Remove existing coverage badge if present (handle both formats)
+              sed -i.bak '/!\[Coverage\].*github\.com.*gqlex-path-selection-java/d' README.md
+              sed -i.bak '/\[Coverage\].*github\.com.*gqlex-path-selection-java/d' README.md
               
-              # Add new clickable coverage badge at the top
-              sed -i.bak "1i\\
+              # Add new clickable coverage badge at the top (after the title)
+              sed -i.bak "1a\\
+              \\
               $COVERAGE_LINK\\
               \\
-              > 📊 **Click the badge above to view the coverage status page**\\
+              > 📊 **Click the coverage badge above to view the coverage status page**\\
               " README.md
               
               # Commit and push changes
               git config --local user.email "action@github.com"
               git config --local user.name "GitHub Action"
               git add README.md
-              git commit -m "Update coverage badge: $COVERAGE% coverage" || echo "No changes to commit"
+              git commit -m "Update coverage badge: $COVERAGE% coverage - links to coverage status page" || echo "No changes to commit"
               git push || echo "Could not push changes"
             fi
           fi
