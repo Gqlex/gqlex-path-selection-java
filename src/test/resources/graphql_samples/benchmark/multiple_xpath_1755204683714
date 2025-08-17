@@ -1,0 +1,18 @@
+query MultiPathQuery {
+  user(id: "123") {
+    id
+    name
+    profile {
+      bio
+      avatar
+    }
+    posts {
+      id
+      title
+      comments {
+        id
+        text
+      }
+    }
+  }
+}
