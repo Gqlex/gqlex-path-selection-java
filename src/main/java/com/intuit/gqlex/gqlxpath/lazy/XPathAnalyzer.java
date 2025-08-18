@@ -15,6 +15,11 @@ public class XPathAnalyzer {
     public XPathAnalysis analyzeXPath(String xpath) {
         XPathAnalysis analysis = new XPathAnalysis();
         
+        // Handle null or empty xpath
+        if (xpath == null || xpath.trim().isEmpty()) {
+            return analysis;
+        }
+        
         // Parse xpath components
         List<XPathComponent> components = parseXPathComponents(xpath);
         

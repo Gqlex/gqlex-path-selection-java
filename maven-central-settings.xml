@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+          http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- 
+    Maven Settings for Maven Central Publishing
+    Copy this file to ~/.m2/settings.xml and update with your credentials
+    -->
+
+    <servers>
+        <!-- Sonatype Central Publishing -->
+        <server>
+            <id>central</id>
+            <username>YOUR_SONATYPE_USERNAME</username>
+            <password>YOUR_SONATYPE_PASSWORD</password>
+        </server>
+    </servers>
+
+    <profiles>
+        <!-- Profile for GPG signing -->
+        <profile>
+            <id>gpg</id>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>YOUR_GPG_PASSPHRASE</gpg.passphrase>
+            </properties>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>gpg</activeProfile>
+    </activeProfiles>
+
+</settings>
+

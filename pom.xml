@@ -49,8 +49,6 @@
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
         <central.repo>https://mvnrepository.com/artifact/</central.repo>
-        <!--<releasedeployrepo>https://artifactory.a.intuit.com/artifactory/maven.fraudprevention.imvisionintuit-releases</releasedeployrepo>
-        <snapshotdeployrepo>https://artifactory.a.intuit.com/artifactory/maven.fraudprevention.imvisionintuit-snapshots</snapshotdeployrepo>-->
     </properties>
    <!-- <scm>
         <connection>scm:git:https://github.intuit.com/fraudprevention/blade-graphql-lib.git</connection>
@@ -153,6 +151,56 @@
                 </configuration>
             </plugin>
 
+            <!-- Source JAR plugin for Maven Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Javadoc JAR plugin for Maven Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>11</source>
+                    <doclint>none</doclint>
+                </configuration>
+            </plugin>
+
+            <!-- GPG signing plugin for Maven Central -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -214,6 +262,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <excludedTags>benchmark</excludedTags>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
         </plugins>
@@ -242,21 +292,7 @@
             <url>${central.repo}</url>
         </repository>
     </repositories>
-    <distributionManagement>
-        <snapshotRepository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>scm.dev.snap.repo</id>
-            <name>SNAPSHOT REPO</name>
-            <url>${snapshotdeployrepo}</url>
-            <layout>default</layout>
-        </snapshotRepository>
-        <repository>
-            <id>scm.int.rel.repo</id>
-            <name>RELEASE REPO</name>
-            <url>${releasedeployrepo}</url>
-            <layout>default</layout>
-        </repository>
-    </distributionManagement>
+    <!-- Distribution management is handled by the Sonatype Central Publishing Plugin -->
 
     <!-- Profiles for different test configurations -->
     <profiles>
