@@ -5,15 +5,15 @@
 | Metric | Value |
 |--------|-------|
 | **Overall Coverage** | **53%** |
-| **Last Build** | [Run #51](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051113937) |
+| **Last Build** | [Run #52](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051148511) |
 | **Branch** |  |
-| **Commit** | [](https://github.com/Gqlex/gqlex-path-selection-java/commit/050c5506cd7dac023f40639177843e6a6cdd3a9d) |
-| **Last Updated** | 2025-08-18 20:01 UTC |
+| **Commit** | [](https://github.com/Gqlex/gqlex-path-selection-java/commit/5bbe7cb0ab3fdac0b15cc4fb26c5fd025266ff5d) |
+| **Last Updated** | 2025-08-18 20:03 UTC |
 
 ## 🔗 Quick Access
 
-- **📋 [View Latest Workflow Run](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051113937)**
-- **📥 [Download Full Coverage Reports](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051113937)**
+- **📋 [View Latest Workflow Run](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051148511)**
+- **📥 [Download Full Coverage Reports](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051148511)**
 - **📊 [View All Actions](https://github.com/Gqlex/gqlex-path-selection-java/actions)**
 - **📋 [Coverage Status](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)** - Quick overview page
 
@@ -45,7 +45,7 @@ Coverage is tracked across all builds. View historical data in the Actions tab.
 
 - **🏠 [Coverage Status](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_STATUS.md)** - Main coverage page
 - **📊 [Coverage Summary](https://github.com/Gqlex/gqlex-path-selection-java/blob/main/docs/COVERAGE_SUMMARY.md)** - Quick overview
-- **🚀 [Latest Build](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051113937)** - Download artifacts
+- **🚀 [Latest Build](https://github.com/Gqlex/gqlex-path-selection-java/actions/runs/17051148511)** - Download artifacts
 
 ---
 *🔄 Updated automatically on every build*

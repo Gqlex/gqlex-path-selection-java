@@ -6,7 +6,7 @@
 
 - **HTML Report**: Available as artifact in GitHub Actions
 - **XML Report**: Available as artifact in GitHub Actions
-- **Last Updated**: 2025-08-18 20:01 UTC
+- **Last Updated**: 2025-08-18 20:03 UTC
 
 ## 🔍 How to View Coverage
 
