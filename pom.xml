@@ -45,6 +45,7 @@
         <junit.version>5.7.2</junit.version>
         <jacoco.enabled>true</jacoco.enabled>
         <jacoco.version>0.8.13</jacoco.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
@@ -252,6 +253,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
